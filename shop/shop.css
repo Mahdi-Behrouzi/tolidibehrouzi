@@ -1,0 +1,49 @@
+/* ساده و واکنش‌گرا، می‌تونی رنگ/فونت را با style.css اصلی همسان کنی */
+:root { --accent:#0b66c3; --muted:#777; }
+
+body { font-family: Vazirmatn, Tahoma, sans-serif; background:#f5f6f8; margin:0; color:#222; }
+
+.wrap { max-width:1200px; margin:0 auto; padding:16px; }
+
+.shop-header { background:white; border-bottom:1px solid #e6e6e6; }
+.shop-header .wrap { display:flex; align-items:center; gap:16px; padding:12px 16px; }
+.shop-header h1 { margin:0; font-size:1.2rem; }
+
+.shop-controls { display:flex; justify-content:space-between; gap:12px; margin:16px 0; align-items:center; }
+.shop-controls input { padding:8px; width:60%; border:1px solid #ddd; border-radius:6px; }
+
+.shop-container { display:grid; grid-template-columns: 260px 1fr; gap:16px; align-items:start; }
+
+.filter-panel { background:white; padding:12px; border-radius:8px; border:1px solid #eaeaea; }
+.filter-panel h3 { margin-top:0; }
+.filter-panel .field { margin:8px 0; }
+
+.product-list { display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+
+.product-card { background:white; border-radius:8px; overflow:hidden; border:1px solid #eaeaea; display:flex; flex-direction:column; }
+.product-card img { width:100%; height:200px; object-fit:cover; display:block; }
+.product-card .info { padding:10px; flex:1; display:flex; flex-direction:column; gap:8px; }
+.product-card h4 { margin:0; font-size:1rem; }
+.price { font-weight:700; }
+.old-price { text-decoration:line-through; color:var(--muted); font-size:0.9rem; }
+
+.product-card .actions { display:flex; gap:8px; padding:10px; }
+.btn { background:var(--accent); color:white; border:none; padding:8px; border-radius:6px; cursor:pointer; }
+.btn.secondary { background:#6c757d; }
+
+.cart-panel { position:fixed; bottom:18px; left:18px; width:280px; background:white; border-radius:8px; padding:10px; box-shadow:0 6px 20px rgba(0,0,0,0.12); border:1px solid #eaeaea; }
+.cart-panel h4 { margin:0 0 8px 0; font-size:1rem; }
+.cart-item { display:flex; justify-content:space-between; gap:6px; font-size:0.95rem; margin-bottom:6px; }
+
+.modal { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.4); padding:20px; }
+.modal .card { width:100%; max-width:800px; background:white; border-radius:8px; padding:16px; }
+.hidden { display:none; }
+
+.pagination { margin:16px 0; text-align:center; }
+.page-btn { margin:0 6px; padding:6px 10px; border-radius:6px; border:1px solid #ddd; cursor:pointer; }
+
+@media (max-width:900px) {
+  .shop-container { grid-template-columns: 1fr; }
+  .shop-controls input { width:100%; }
+  .cart-panel { left:50%; transform:translateX(-50%); width:95%; }
+  }

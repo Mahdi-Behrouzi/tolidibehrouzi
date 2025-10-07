@@ -1,66 +1,48 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>فروشگاه — تولیدی بهروزی</title>
-  <!-- اگر می‌خواهی از CSS کلی سایت استفاده شود -->
-  <link rel="stylesheet" href="../style.css">
-  <!-- استایل اختصاصی فروشگاه -->
-  <link rel="stylesheet" href="shop.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فروشگاه تولیدی بهروزی</title>
+<link rel="stylesheet" href="shop.css">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="shop-header">
-    <div class="wrap">
-      <a class="home-link" href="../index.html">🏠 خانه</a>
-      <h1>فروشگاه تولیدی بهروزی</h1>
-    </div>
-  </header>
+<header>
+  <div class="header-container">
+    <h1>تولیدی بهروزی</h1>
+    <nav>
+      <a href="../index.html">خانه</a>
+      <a href="shop.html" class="active">فروشگاه</a>
+    </nav>
+  </div>
+</header>
 
-  <main class="wrap shop-main">
-    <div class="shop-controls">
-      <input id="searchInput" placeholder="جستجو در محصولات..." />
-      <div class="right-controls">
-        <label>نمایش: 
-          <select id="sortBy">
-            <option value="popular">پربازدیدترین</option>
-            <option value="price-asc">قیمت: کم → زیاد</option>
-            <option value="price-desc">قیمت: زیاد → کم</option>
-            <option value="rating">بالاترین امتیاز</option>
-          </select>
-        </label>
-      </div>
-    </div>
+<main>
+  <section class="filters">
+    <label>برند:
+      <select onchange="filterProducts(this.value, null)">
+        <option value="">همه</option>
+        <option value="Behrouzi">Behrouzi</option>
+      </select>
+    </label>
+    <label>دسته‌بندی:
+      <select onchange="filterProducts(null, this.value)">
+        <option value="">همه</option>
+        <option value="کیف دوشی">کیف دوشی</option>
+        <option value="کیف دستی">کیف دستی</option>
+      </select>
+    </label>
+  </section>
 
-    <div class="shop-container">
-      <aside class="filter-panel">
-        <h3>فیلترها</h3>
-        <div class="field">
-          <label>قیمت از: <input type="number" id="priceMin" value="0"></label>
-        </div>
-        <div class="field">
-          <label>تا: <input type="number" id="priceMax" value="10000000"></label>
-        </div>
-        <div class="field">
-          <label><input type="checkbox" id="inStock"> فقط کالاهای موجود</label>
-        </div>
-        <button id="resetFilters" class="btn">پاکسازی فیلترها</button>
-      </aside>
+  <section id="productList" class="product-grid">
+    <!-- محصولات اینجا رندر می‌شوند -->
+  </section>
+</main>
 
-      <section class="product-list" id="productList">
-        <!-- کارت محصولات اینجا رندر می‌شود -->
-      </section>
-    </div>
+<!-- مودال جزئیات محصول -->
+<div id="modal" class="modal hidden"></div>
 
-    <div class="pagination" id="pagination"></div>
-  </main>
-
-  <!-- پنل سبد خرید کوچک -->
-  <div class="cart-panel" id="cartPanel"></div>
-
-  <!-- مودال جزئیات -->
-  <div id="modal" class="modal hidden"></div>
-
-  <script src="shop.js"></script>
+<script src="shop.js"></script>
 </body>
 </html>

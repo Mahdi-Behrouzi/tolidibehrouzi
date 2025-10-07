@@ -239,3 +239,94 @@ function filterProducts(brand, category) {
 // شروع کار
 // -------------------
 loadProducts();
+// باز کردن سبد خرید
+function openCart() {
+  document.getElementById('cartModal').classList.remove('hidden');
+  renderCart();
+}
+
+// بستن سبد خرید
+function closeCart() {
+  document.getElementById('cartModal').classList.add('hidden');
+  document.getElementById('cartItems').innerHTML = '';
+}
+
+// افزودن محصول به سبد خرید
+function addToCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const existing = CART.find(x => x.id === id);
+  if (existing) {
+    existing.count++;
+  } else {
+    CART.push({...p, count:1});
+  }
+  alert(`${p.title} به سبد خرید اضافه شد ✅`);
+  renderCart();
+}
+
+// رندر سبد خرید
+function renderCart() {
+  const container = document.getElementById('cartItems');
+  container.innerHTML = '';
+  if (CART.length === 0) {
+    container.innerHTML = '<p>سبد خرید خالی است</p>';
+    document.getElementById('cartTotal').innerText = '';
+    return;
+  }
+
+  let total = 0;
+  CART.forEach((p,index) => {
+    total += p.price * p.count;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <img src="${p.image}">
+      <div class="title">${p.title}</div>
+      <div class="quantity">
+        <button onclick="changeQuantity(${index},-1)">-</button>
+        ${p.count}
+        <button onclick="changeQuantity(${index},1)">+</button>
+      </div>
+      <div class="price">${formatPrice(p.price * p.count)}</div>
+      <button onclick="removeCartItem(${index})">حذف</button>
+    `;
+    container.appendChild(div);
+  });
+
+  document.getElementById('cartTotal').innerText = `جمع کل: ${formatPrice(total)}`;
+}
+
+// تغییر تعداد محصول
+function changeQuantity(index, delta) {
+  CART[index].count += delta;
+  if (CART[index].count < 1) CART[index].count = 1;
+  renderCart();
+}
+
+// حذف محصول از سبد
+function removeCartItem(index) {
+  CART.splice(index,1);
+  renderCart();
+}
+
+// تسویه سبد
+function checkoutCart() {
+  const name = document.getElementById('orderName').value.trim();
+  const phone = document.getElementById('orderPhone').value.trim();
+  const address = document.getElementById('orderAddress').value.trim();
+  const phoneRegex = /^09\d{9}$/;
+
+  if(!name || !phone || !address) return alert("همه فیلدها الزامی هستند");
+  if(!phoneRegex.test(phone)) return alert("شماره تماس معتبر نیست");
+
+  let total = CART.reduce((sum,p)=>sum+p.price*p.count,0);
+  alert(`سفارش شما با موفقیت ثبت شد ✅\nنام: ${name}\nشماره: ${phone}\nآدرس: ${address}\nجمع کل: ${total.toLocaleString('fa-IR')} تومان`);
+
+  // پاک کردن سبد و فرم
+  CART = [];
+  document.getElementById('orderName').value='';
+  document.getElementById('orderPhone').value='';
+  document.getElementById('orderAddress').value='';
+  renderCart();
+}

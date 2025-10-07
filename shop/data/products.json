@@ -1,0 +1,8 @@
+[
+  {"id":1,"title":"کیف چرمی مدل آذر","price":129000,"oldPrice":149000,"rating":4.5,"sold":320,"image":"https://picsum.photos/seed/bag1/600/600","inStock":true},
+  {"id":2,"title":"کيف دوشی مدل نغمه","price":99000,"oldPrice":null,"rating":4.2,"sold":210,"image":"https://picsum.photos/seed/bag2/600/600","inStock":true},
+  {"id":3,"title":"کفش اسپرت مدل تندر","price":89000,"oldPrice":109000,"rating":4.6,"sold":480,"image":"https://picsum.photos/seed/shoe1/600/600","inStock":false},
+  {"id":4,"title":"کیف پاسپورتی مدل الماس","price":159000,"oldPrice":199000,"rating":4.8,"sold":150,"image":"https://picsum.photos/seed/bag3/600/600","inStock":true},
+  {"id":5,"title":"کاپشن سبک مدل برگ","price":299000,"oldPrice":349000,"rating":4.1,"sold":90,"image":"https://picsum.photos/seed/jacket1/600/600","inStock":true},
+  {"id":6,"title":"کیف رودوشی مدل مینا","price":119000,"oldPrice":139000,"rating":4.3,"sold":65,"image":"https://picsum.photos/seed/bag4/600/600","inStock":true}
+]

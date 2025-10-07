@@ -37,7 +37,22 @@
 
   <section id="productList" class="product-grid">
     <!-- محصولات اینجا رندر می‌شوند -->
-  </section>
+  </section
+    <!-- سبد خرید پیشرفته -->
+<div id="cartModal" class="modal hidden">
+  <div class="card">
+    <button class="close-btn" onclick="closeCart()">✕</button>
+    <h2>سبد خرید شما</h2>
+    <div id="cartItems"></div>
+    <div id="cartTotal" style="margin-top:12px;font-weight:bold;"></div>
+
+    <h3>تسویه حساب</h3>
+    <input id="orderName" placeholder="نام و نام خانوادگی"><br>
+    <input id="orderPhone" placeholder="شماره تماس (مثال: 09123456789)"><br>
+    <textarea id="orderAddress" placeholder="آدرس"></textarea><br>
+    <button class="btn" onclick="checkoutCart()">تایید و ثبت سفارش</button>
+  </div>
+</div>
 </main>
 
 <!-- مودال جزئیات محصول -->

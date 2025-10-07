@@ -1,178 +1,241 @@
-// ساده، بدون کتابخانه خارجی. رندر محصولات، فیلتر، مرتب‌سازی، صفحه‌بندی، سبد خرید (localStorage)
-const PER_PAGE = 12;
-let PRODUCTS = [];
-let page = 1;
+const BIN_ID = "68e50c67d0ea881f40986859"; // Bin جدید نظرات فروشگاه
+const API_KEY = "$2a$10$BAz3UXrj2Hs4CTSu9Sx.SORA0uPP1H62lvU/gZsySq7/iEzRRnAVe";
+const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
-async function loadProducts(){
+// سبد خرید
+let CART = [];
+
+// نمونه محصولات (همچنان با JSON، میتونی محصولات جدید اضافه کنی)
+let PRODUCTS = [];
+
+// بارگذاری محصولات از JSON محلی
+async function loadProducts() {
   const res = await fetch('data/products.json');
   PRODUCTS = await res.json();
+  renderProducts();
 }
 
-function formatPrice(n){ return n.toLocaleString() + ' تومان'; }
-
-function applyFilters(){
-  const q = document.getElementById('searchInput').value.trim();
-  const min = Number(document.getElementById('priceMin').value) || 0;
-  const max = Number(document.getElementById('priceMax').value) || Infinity;
-  const inStock = document.getElementById('inStock').checked;
-  let arr = PRODUCTS.slice();
-
-  if(q) arr = arr.filter(p => p.title.includes(q));
-  arr = arr.filter(p => p.price >= min && p.price <= max);
-  if(inStock) arr = arr.filter(p => p.inStock);
-
-  const sort = document.getElementById('sortBy').value;
-  if(sort === 'price-asc') arr.sort((a,b)=>a.price-b.price);
-  else if(sort === 'price-desc') arr.sort((a,b)=>b.price-a.price);
-  else if(sort === 'rating') arr.sort((a,b)=>b.rating-a.rating);
-  else arr.sort((a,b)=>b.sold - a.sold);
-
-  return arr;
-}
-
-function renderProducts(){
-  const out = applyFilters();
-  const totalPages = Math.max(1, Math.ceil(out.length / PER_PAGE));
-  if(page > totalPages) page = totalPages;
-  const start = (page-1) * PER_PAGE;
-  const slice = out.slice(start, start + PER_PAGE);
-
+// نمایش محصولات
+function renderProducts(filter = {}) {
   const container = document.getElementById('productList');
+  if (!container) return;
   container.innerHTML = '';
-  slice.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    card.innerHTML = `
-      <img src="${p.image}" alt="${p.title}" />
-      <div class="info">
-        <h4>${p.title}</h4>
-        <div class="price">${formatPrice(p.price)}</div>
-        ${p.oldPrice ? `<div class="old-price">${formatPrice(p.oldPrice)}</div>` : ''}
-        <div style="margin-top:auto;color:#666;font-size:0.9rem;">⭐ ${p.rating} — ${p.sold} فروخته</div>
-      </div>
-      <div class="actions">
-        <button class="btn" onclick="addToCart(${p.id})">افزودن به سبد</button>
-        <button class="btn secondary" onclick="viewDetail(${p.id})">مشاهده</button>
-      </div>
-    `;
-    container.appendChild(card);
-  });
+  let list = [...PRODUCTS];
 
-  renderPagination(totalPages);
-}
+  // فیلتر برند یا دسته‌بندی
+  if (filter.brand) list = list.filter(p => p.brand === filter.brand);
+  if (filter.category) list = list.filter(p => p.category === filter.category);
 
-function renderPagination(totalPages){
-  const el = document.getElementById('pagination');
-  el.innerHTML = '';
-  if(totalPages <= 1) return;
-  const prev = document.createElement('button');
-  prev.className = 'page-btn';
-  prev.textContent = 'قبلی';
-  prev.disabled = page === 1;
-  prev.onclick = ()=>{ page = Math.max(1, page-1); renderProducts(); };
-  el.appendChild(prev);
-
-  const info = document.createElement('span');
-  info.textContent = `صفحه ${page} از ${totalPages}`;
-  el.appendChild(info);
-
-  const next = document.createElement('button');
-  next.className = 'page-btn';
-  next.textContent = 'بعدی';
-  next.disabled = page === totalPages;
-  next.onclick = ()=>{ page = Math.min(totalPages, page+1); renderProducts(); };
-  el.appendChild(next);
-}
-
-/* CART (localStorage) */
-function readCart(){ return JSON.parse(localStorage.getItem('shop_cart') || '[]'); }
-function saveCart(c){ localStorage.setItem('shop_cart', JSON.stringify(c)); updateCartUI(); }
-
-function addToCart(id){
-  const p = PRODUCTS.find(x=>x.id===id);
-  if(!p) return alert('محصول پیدا نشد');
-  const cart = readCart();
-  const found = cart.find(i=>i.id===id);
-  if(found) found.qty++;
-  else cart.push({id:p.id,title:p.title,price:p.price,qty:1});
-  saveCart(cart);
-}
-
-function removeFromCart(id){
-  let cart = readCart();
-  cart = cart.filter(i=>i.id!==id);
-  saveCart(cart);
-}
-
-function updateCartUI(){
-  const panel = document.getElementById('cartPanel');
-  const cart = readCart();
-  panel.innerHTML = `<h4>سبد خرید (${cart.length})</h4>`;
-  if(cart.length === 0){ panel.innerHTML += '<div class="muted">سبد شما خالی است</div>'; return; }
-  cart.forEach(item=>{
+  list.forEach(p => {
     const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.innerHTML = `<div>${item.title} × ${item.qty}</div><div>${(item.price*item.qty).toLocaleString()} <button onclick="removeFromCart(${item.id})" style="color:#c33;background:none;border:none;cursor:pointer">حذف</button></div>`;
-    panel.appendChild(div);
+    div.className = 'product-card';
+    div.innerHTML = `
+      <img src="${p.image}" alt="${p.title}">
+      <h3>${p.title}</h3>
+      <div>⭐ ${p.rating} (${p.reviews ? p.reviews.length : 0})</div>
+      <div class="price">
+        ${p.oldPrice ? `<span class="old-price">${formatPrice(p.oldPrice)}</span>` : ''}
+        <span class="current-price">${formatPrice(p.price)}</span>
+      </div>
+      <button onclick="viewDetail(${p.id})">جزئیات</button>
+      <button onclick="addToCart(${p.id})">سبد خرید</button>
+    `;
+    container.appendChild(div);
   });
-  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const foot = document.createElement('div');
-  foot.style.marginTop='8px';
-  foot.innerHTML = `<strong>جمع: ${total.toLocaleString()} تومان</strong><div style="margin-top:8px;"><button class="btn" onclick="checkout()">تسویه</button></div>`;
-  panel.appendChild(foot);
 }
 
-function checkout(){
-  alert('اینجا می‌تونی لاجیک تسویه را پیاده کنی (ارسال به سرور یا باز کردن صفحه پرداخت).');
+// تابع قیمت
+function formatPrice(num) {
+  return num.toLocaleString('fa-IR') + ' تومان';
 }
 
-/* Modal */
-function viewDetail(id){
-  const p = PRODUCTS.find(x=>x.id===id);
-  if(!p) return;
+// باز کردن جزئیات محصول
+function viewDetail(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
   const modal = document.getElementById('modal');
   modal.classList.remove('hidden');
-  modal.innerHTML = `<div class="card">
-    <button style="float:left" onclick="closeModal()">بستن ✕</button>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <img src="${p.image}" style="width:320px;height:320px;object-fit:cover;border-radius:8px" />
-      <div style="flex:1">
-        <h2>${p.title}</h2>
-        <div style="font-weight:700;margin:8px 0">${formatPrice(p.price)}</div>
-        ${p.oldPrice ? `<div class="old-price">${formatPrice(p.oldPrice)}</div>` : ''}
-        <p style="color:#555">توضیحات نمونه: این قسمت را با توضیحات واقعی محصول جایگزین کن.</p>
-        <div style="margin-top:12px">
-          <button class="btn" onclick="addToCart(${p.id}); closeModal()">افزودن به سبد</button>
-          <button class="btn secondary" onclick="checkout()">خرید سریع</button>
+
+  modal.innerHTML = `
+    <div class="card">
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <div class="detail-tabs">
+        <button class="tab-btn active" data-tab="info">اطلاعات</button>
+        <button class="tab-btn" data-tab="specs">مشخصات</button>
+        <button class="tab-btn" data-tab="reviews">نظرات</button>
+      </div>
+
+      <div class="tab-content" id="tab-info">
+        <div class="flex-row">
+          <img src="${p.image}" class="detail-img">
+          <div class="detail-right">
+            <h2>${p.title}</h2>
+            <div class="price">
+              ${p.oldPrice ? `<span class="old-price">${formatPrice(p.oldPrice)}</span>` : ''}
+              <span class="current-price">${formatPrice(p.price)}</span>
+            </div>
+            <p>${p.description || 'توضیحی برای این محصول وجود ندارد.'}</p>
+            <div class="buttons">
+              <button class="btn" onclick="addToCart(${p.id}); closeModal()">افزودن به سبد</button>
+              <button class="btn secondary" onclick="checkout()">خرید سریع</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="related-products">
+          <h3>پیشنهادات مرتبط</h3>
+          <div id="relatedList" class="related-list"></div>
+        </div>
+      </div>
+
+      <div class="tab-content hidden" id="tab-specs">
+        <h3>مشخصات فنی</h3>
+        <ul>
+          ${(p.specs || []).map(s => `<li><strong>${s.key}:</strong> ${s.value}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="tab-content hidden" id="tab-reviews">
+        <h3>نظرات کاربران</h3>
+        <div id="reviewsList"></div>
+        <div class="review-form">
+          <h4>ثبت نظر شما</h4>
+          <input id="revUser" placeholder="نام شما"><br>
+          <select id="revRating">${[5,4,3,2,1].map(n=>`<option value="${n}">${n}</option>`).join('')}</select>
+          <textarea id="revComment" placeholder="نظر شما..."></textarea><br>
+          <button class="btn" onclick="submitReview(${p.id})">ارسال نظر</button>
         </div>
       </div>
     </div>
-  </div>`;
+  `;
+
+  // فعال کردن تب‌ها
+  modal.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      modal.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      modal.querySelectorAll('.tab-content').forEach(tc => tc.classList.add('hidden'));
+      modal.querySelector(`#tab-${tab}`).classList.remove('hidden');
+    });
+  });
+
+  // بارگذاری پیشنهادات مرتبط
+  const related = PRODUCTS.filter(x => x.id !== p.id).slice(0,3);
+  const relDiv = document.getElementById('relatedList');
+  related.forEach(r => {
+    const d = document.createElement('div');
+    d.className = 'related-item';
+    d.innerHTML = `<img src="${r.image}"><div>${r.title}</div>`;
+    d.onclick = ()=>viewDetail(r.id);
+    relDiv.appendChild(d);
+  });
+
+  // بارگذاری نظرات
+  renderReviews(id);
 }
 
-function closeModal(){ document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').innerHTML=''; }
-
-/* event bind */
-function setup(){
-  document.getElementById('searchInput').addEventListener('input', () => { page = 1; renderProducts(); });
-  ['priceMin','priceMax','inStock','sortBy'].forEach(id=>{
-    const el = document.getElementById(id);
-    if(!el) return;
-    el.addEventListener('change', ()=>{ page = 1; renderProducts(); });
-  });
-  document.getElementById('resetFilters').addEventListener('click', ()=>{
-    document.getElementById('priceMin').value='0';
-    document.getElementById('priceMax').value='10000000';
-    document.getElementById('inStock').checked=false;
-    document.getElementById('sortBy').value='popular';
-    page = 1; renderProducts();
-  });
+// بستن مودال
+function closeModal() {
+  document.getElementById('modal').classList.add('hidden');
+  document.getElementById('modal').innerHTML = '';
 }
 
-/* init */
-(async function(){
-  await loadProducts();
-  setup();
-  renderProducts();
-  updateCartUI();
-})();
+// سبد خرید
+function addToCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  CART.push(p);
+  alert(`${p.title} به سبد خرید اضافه شد ✅`);
+}
+
+// خرید سریع
+function checkout() {
+  if (CART.length === 0) return alert("سبد خرید خالی است!");
+  let total = CART.reduce((sum,p)=>sum+p.price,0);
+  alert(`مجموع مبلغ: ${total.toLocaleString('fa-IR')} تومان\nمتشکریم از خرید شما!`);
+  CART = [];
+}
+
+// -------------------
+// JSONBin نظرات
+// -------------------
+async function loadReviews() {
+  try {
+    const res = await fetch(BIN_URL + "/latest", {
+      headers: { "X-Master-Key": API_KEY }
+    });
+    const data = await res.json();
+    return data.record.reviews || {};
+  } catch(err) {
+    console.error(err);
+    return {};
+  }
+}
+
+async function submitReview(productId) {
+  const user = document.getElementById('revUser').value.trim();
+  const rating = Number(document.getElementById('revRating').value);
+  const comment = document.getElementById('revComment').value.trim();
+  if (!user || !comment) return alert("نام و نظر الزامی است");
+
+  let reviews = await loadReviews();
+  if (!reviews[productId]) reviews[productId] = [];
+  reviews[productId].push({ user, rating, comment });
+
+  try {
+    await fetch(BIN_URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": API_KEY
+      },
+      body: JSON.stringify({ reviews })
+    });
+    alert("نظر شما با موفقیت ثبت شد ✅");
+    document.getElementById('revUser').value = '';
+    document.getElementById('revRating').value = 5;
+    document.getElementById('revComment').value = '';
+    renderReviews(productId);
+  } catch(err) {
+    console.error(err);
+    alert("خطا در ثبت نظر ❌");
+  }
+}
+
+async function renderReviews(productId) {
+  const reviewsData = await loadReviews();
+  const productReviews = reviewsData[productId] || [];
+  const container = document.getElementById('reviewsList');
+  if (!container) return;
+  container.innerHTML = '';
+  if (productReviews.length === 0) {
+    container.innerHTML = '<p>هنوز نظری ثبت نشده است</p>';
+    return;
+  }
+  let totalRating = 0;
+  productReviews.forEach(r => {
+    totalRating += r.rating;
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    div.innerHTML = `<strong>${r.user}</strong> — ⭐ ${r.rating}<br>${r.comment}`;
+    container.appendChild(div);
+  });
+  const avg = (totalRating / productReviews.length).toFixed(1);
+  const avgDiv = document.createElement('div');
+  avgDiv.style.margin = '12px 0';
+  avgDiv.innerHTML = `<strong>میانگین امتیاز: ⭐${avg} از ${productReviews.length} نظر</strong>`;
+  container.prepend(avgDiv);
+}
+
+// -------------------
+// فیلتر ساده
+// -------------------
+function filterProducts(brand, category) {
+  renderProducts({brand, category});
+}
+
+// -------------------
+// شروع کار
+// -------------------
+loadProducts();

@@ -1,32 +1,128 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>فروشگاه تولیدی بهروزی</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>فروشگاه من – شبیه دیجی‌کالا</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- FontAwesome -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Swiper CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- استایل اختصاصی -->
+  <link href="assets/css/style.css" rel="stylesheet" />
 </head>
 <body>
-  <header>
-    <h1>فروشگاه تولیدی بهروزی</h1>
-    <input type="text" id="search" placeholder="جستجوی محصول..." />
-    <select id="category-filter">
-      <option value="">همه دسته‌ها</option>
-    </select>
+
+  <!-- بالای صفحه (Topbar) -->
+  <div class="bg-dark text-light py-1 small">
+    <div class="container d-flex justify-content-between">
+      <div>ارسال سریع برای مشهد</div>
+      <div>
+        <a href="#" class="text-light me-3"><i class="fa-solid fa-phone"></i> 021-12345678</a>
+        <a href="#" class="text-light"><i class="fa-solid fa-user"></i> حساب کاربری</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- هدر با لوگو و جستجو -->
+  <header class="bg-white py-3 shadow-sm">
+    <div class="container d-flex align-items-center">
+      <a href="#" class="navbar-brand me-4">
+        <img src="assets/images/logo.png" alt="لوگو" height="40" />
+      </a>
+      <form class="flex-grow-1 me-4">
+        <div class="input-group">
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            placeholder="جستجو در محصولات ..."
+          />
+          <button class="btn btn-outline-secondary" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </form>
+      <a href="#" class="text-secondary me-3">
+        <i class="fa-solid fa-heart fa-lg"></i>
+      </a>
+      <a href="#" class="text-secondary">
+        <i class="fa-solid fa-cart-shopping fa-lg"></i>
+      </a>
+    </div>
   </header>
 
-  <section id="products" class="product-list"></section>
+  <!-- منوی دسته‌بندی‌ها -->
+  <nav class="bg-white border-top border-bottom">
+    <div class="container">
+      <ul class="nav">
+        <li class="nav-item"><a class="nav-link" href="#">موبایل</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">لپ‌تاپ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">ساعت</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">لوازم جانبی</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">کتاب</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <section id="cart" class="cart">
-    <h2>🛒 سبد خرید</h2>
-    <ul id="cart-items"></ul>
-    <p id="cart-total">جمع کل: ۰ تومان</p>
+  <!-- بنر اسلایدر -->
+  <section class="container my-4">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="assets/images/banner1.jpg" class="w-100 rounded" alt="بنر ۱" />
+        </div>
+        <div class="swiper-slide">
+          <img src="assets/images/banner2.jpg" class="w-100 rounded" alt="بنر ۲" />
+        </div>
+        <div class="swiper-slide">
+          <img src="assets/images/banner3.jpg" class="w-100 rounded" alt="بنر ۳" />
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
   </section>
 
-  <footer>
-    <p>© 2025 تولیدی بهروزی</p>
+  <!-- بخش محصولات منتخب -->
+  <section class="container my-5">
+    <h4 class="mb-3">پیشنهاد ویژه</h4>
+    <div class="row" id="productsContainer">
+      <!-- کارت‌های محصول با JS اینجا درج می‌شوند -->
+    </div>
+  </section>
+
+  <!-- فوتر -->
+  <footer class="bg-dark text-light py-4">
+    <div class="container text-center">
+      <p>© 2025 فروشگاه من</p>
+      <div>
+        <a href="#" class="text-light me-3">درباره ما</a>
+        <a href="#" class="text-light me-3">تماس با ما</a>
+        <a href="#" class="text-light">سوالات متداول</a>
+      </div>
+    </div>
   </footer>
 
-  <script src="main.js"></script>
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- فایل JS ما -->
+  <script src="assets/js/main.js"></script>
 </body>
-</html>
+      </html>

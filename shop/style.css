@@ -5,15 +5,16 @@ body {
   padding: 0;
 }
 header {
-  background: #222;
+  background: #d32f2f;
   color: #fff;
   padding: 1rem;
   text-align: center;
 }
-nav a {
-  margin: 0 1rem;
-  color: #fff;
-  text-decoration: none;
+input, select {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: 80%;
+  max-width: 400px;
 }
 .product-list {
   display: flex;
@@ -25,12 +26,33 @@ nav a {
   border: 1px solid #ccc;
   margin: 1rem;
   padding: 1rem;
-  width: 200px;
+  width: 220px;
   text-align: center;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.product-card img {
+  width: 100%;
+  height: auto;
+}
+button {
+  background: #388e3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.cart {
+  background: #f9f9f9;
+  padding: 1rem;
+  margin: 1rem;
 }
 footer {
   background: #eee;
   text-align: center;
   padding: 1rem;
-  margin-top: 2rem;
+}
+@media (max-width: 600px) {
+  .product-card {
+    width: 90%;
+  }
 }

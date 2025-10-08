@@ -1,64 +1,258 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فروشگاه تولیدی بهروزی</title>
-<link rel="stylesheet" href="shop.css">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه مدرن - بهترین محصولات</title>
+    <link rel="stylesheet" href="shop.css">
 </head>
 <body>
-<header>
-  <div class="header-container">
-    <h1>تولیدی بهروزی</h1>
-    <nav>
-      <a href="../index.html">خانه</a>
-      <a href="shop.html" class="active">فروشگاه</a>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-header">
+            <div class="logo" onclick="location.reload()">🛍️ فروشگاه مدرن</div>
+            <div class="search-bar">
+                <input type="text" placeholder="جستجوی محصولات..." id="searchInput">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="header-actions">
+                <div class="action-btn" onclick="toggleCart()">
+                    🛒
+                    <span class="badge" id="cartCount">0</span>
+                </div>
+                <div class="action-btn">
+                    ❤️
+                    <span class="badge">0</span>
+                </div>
+                <button class="auth-btn" onclick="openModal('login')">ورود / ثبت نام</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    📱 موبایل و تبلت
+                    <div class="mega-menu">
+                        <div class="mega-menu-category">
+                            <h4>گوشی موبایل</h4>
+                            <ul>
+                                <li>سامسونگ</li>
+                                <li>اپل</li>
+                                <li>شیائومی</li>
+                                <li>هواوی</li>
+                            </ul>
+                        </div>
+                        <div class="mega-menu-category">
+                            <h4>تبلت</h4>
+                            <ul>
+                                <li>آیپد</li>
+                                <li>تبلت سامسونگ</li>
+                                <li>تبلت لنوو</li>
+                            </ul>
+                        </div>
+                        <div class="mega-menu-category">
+                            <h4>لوازم جانبی</h4>
+                            <ul>
+                                <li>کاور و قاب</li>
+                                <li>پاوربانک</li>
+                                <li>شارژر</li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">💻 لپ تاپ و کامپیوتر</li>
+                <li class="nav-item">🎮 بازی و سرگرمی</li>
+                <li class="nav-item">👔 مد و پوشاک</li>
+                <li class="nav-item">🏠 خانه و آشپزخانه</li>
+                <li class="nav-item">📚 کتاب و لوازم تحریر</li>
+                <li class="nav-item">🎵 صوتی و تصویری</li>
+            </ul>
+        </div>
     </nav>
-  </div>
-</header>
 
-  
-<main>
-  <section class="filters">
-    <label>برند:
-      <select onchange="filterProducts(this.value, null)">
-        <option value="">همه</option>
-        <option value="Behrouzi">Behrouzi</option>
-      </select>
-    </label>
-    <label>دسته‌بندی:
-      <select onchange="filterProducts(null, this.value)">
-        <option value="">همه</option>
-        <option value="کیف دوشی">کیف دوشی</option>
-        <option value="کیف دستی">کیف دستی</option>
-      </select>
-    </label>
-  </section>
+    <!-- Banner Slider -->
+    <div class="banner-slider">
+        <div class="banner-slide active">
+            <div class="banner-content">
+                <h2>تخفیف های شگفت انگیز</h2>
+                <p>تا ۵۰٪ تخفیف روی محصولات منتخب</p>
+                <button class="banner-btn">مشاهده محصولات</button>
+            </div>
+            <div style="font-size: 10rem;">🎁</div>
+        </div>
+    </div>
 
-  <section id="productList" class="product-grid">
-    <!-- محصولات اینجا رندر می‌شوند -->
-  </section
-    <!-- سبد خرید پیشرفته -->
-<div id="cartModal" class="modal hidden">
-  <div class="card">
-    <button class="close-btn" onclick="closeCart()">✕</button>
-    <h2>سبد خرید شما</h2>
-    <div id="cartItems"></div>
-    <div id="cartTotal" style="margin-top:12px;font-weight:bold;"></div>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            <div class="filter-section">
+                <h3>دسته‌بندی</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="cat1">
+                    <label for="cat1">موبایل و تبلت</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="cat2">
+                    <label for="cat2">لپ تاپ</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="cat3">
+                    <label for="cat3">لوازم جانبی</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="cat4">
+                    <label for="cat4">پوشاک</label>
+                </div>
+            </div>
 
-    <h3>تسویه حساب</h3>
-    <input id="orderName" placeholder="نام و نام خانوادگی"><br>
-    <input id="orderPhone" placeholder="شماره تماس (مثال: 09123456789)"><br>
-    <textarea id="orderAddress" placeholder="آدرس"></textarea><br>
-    <button class="btn" onclick="checkoutCart()">تایید و ثبت سفارش</button>
-  </div>
-</div>
-</main>
+            <div class="filter-section">
+                <h3>برند</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="brand1">
+                    <label for="brand1">سامسونگ</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="brand2">
+                    <label for="brand2">اپل</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="brand3">
+                    <label for="brand3">شیائومی</label>
+                </div>
+            </div>
 
-<!-- مودال جزئیات محصول -->
-<div id="modal" class="modal hidden"></div>
+            <div class="filter-section">
+                <h3>محدوده قیمت</h3>
+                <div class="price-range">
+                    <input type="range" min="0" max="100000000" step="1000000" id="priceRange">
+                    <span id="priceValue">تا ۵۰ میلیون تومان</span>
+                </div>
+            </div>
 
-<script src="shop.js"></script>
+            <div class="filter-section">
+                <h3>موجودی</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="available">
+                    <label for="available">فقط کالاهای موجود</label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Products Section -->
+        <main class="products-section">
+            <div class="section-header">
+                <h2>محصولات پیشنهادی</h2>
+                <select class="sort-select">
+                    <option>مرتب‌سازی بر اساس</option>
+                    <option>جدیدترین</option>
+                    <option>پربازدیدترین</option>
+                    <option>ارزان‌ترین</option>
+                    <option>گران‌ترین</option>
+                </select>
+            </div>
+
+            <div class="products-grid" id="productsGrid"></div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>خدمات مشتریان</h3>
+                <ul>
+                    <li>پاسخ به پرسش‌های متداول</li>
+                    <li>رویه‌های بازگرداندن کالا</li>
+                    <li>شرایط استفاده</li>
+                    <li>حریم خصوصی</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>راهنمای خرید</h3>
+                <ul>
+                    <li>نحوه ثبت سفارش</li>
+                    <li>رویه ارسال سفارش</li>
+                    <li>شیوه‌های پرداخت</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>با ما</h3>
+                <ul>
+                    <li>درباره ما</li>
+                    <li>تماس با ما</li>
+                    <li>فرصت‌های شغلی</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>شبکه‌های اجتماعی</h3>
+                <div class="social-icons">
+                    <span>📱</span>
+                    <span>💬</span>
+                    <span>📷</span>
+                    <span>🎬</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© ۱۴۰۳ تمامی حقوق محفوظ است. ساخته شده با ❤️</p>
+        </div>
+    </footer>
+
+    <!-- Login/Register Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">ورود به حساب کاربری</h2>
+                <span class="close-modal" onclick="closeModal()">×</span>
+            </div>
+            <form id="authForm">
+                <div class="form-group" id="nameGroup" style="display: none;">
+                    <label>نام و نام خانوادگی</label>
+                    <input type="text" id="fullName" placeholder="نام خود را وارد کنید">
+                </div>
+                <div class="form-group">
+                    <label>شماره موبایل یا ایمیل</label>
+                    <input type="text" id="username" placeholder="09123456789" required>
+                </div>
+                <div class="form-group">
+                    <label>رمز عبور</label>
+                    <input type="password" id="password" placeholder="رمز عبور خود را وارد کنید" required>
+                </div>
+                <div class="form-group" id="confirmPasswordGroup" style="display: none;">
+                    <label>تکرار رمز عبور</label>
+                    <input type="password" id="confirmPassword" placeholder="رمز عبور را دوباره وارد کنید">
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">ورود</button>
+                <div class="switch-auth">
+                    <span id="switchText">حساب کاربری ندارید؟</span>
+                    <a id="switchLink" onclick="switchAuthMode()">ثبت نام کنید</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>سبد خرید</h2>
+            <span class="close-modal" onclick="toggleCart()">×</span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p style="text-align: center; padding: 2rem; color: #999;">سبد خرید شما خالی است</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>جمع کل:</span>
+                <span id="cartTotal">۰ تومان</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">تکمیل خرید</button>
+        </div>
+    </div>
+
+    <script src="shop.js"></script>
 </body>
 </html>

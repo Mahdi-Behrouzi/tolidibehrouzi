@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>فروشگاه — تولیدی بهروزی</title>
+  <link rel="stylesheet" href="shop.css">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">تولیدی <span>بهروزی</span></div>
+      <div class="actions">
+        <button class="icon-btn" onclick="toggleView()">نمایش: <span id="viewMode">گرید</span></button>
+        <button class="icon-btn" onclick="openCompare()">مقایسه</button>
+        <button class="icon-btn" onclick="openCart()">سبد (<span id="cartCount">0</span>)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-area">
+    <aside class="sidebar">
+      <div class="searchbox">
+        <input id="searchInput" placeholder="جستجو در محصولات..." />
+      </div>
+
+      <section class="filter">
+        <h4>فیلترها</h4>
+        <label>قیمت از:
+          <input type="number" id="priceMin" placeholder="0">
+        </label>
+        <label>تا:
+          <input type="number" id="priceMax" placeholder="9999999">
+        </label>
+        <label>فقط موجود:
+          <input type="checkbox" id="inStock">
+        </label>
+        <label>برند:
+          <select id="brandFilter"><option value="">همه</option></select>
+        </label>
+        <label>دسته:
+          <select id="categoryFilter"><option value="">همه</option></select>
+        </label>
+        <button id="resetFilters">پاکسازی</button>
+      </section>
+    </aside>
+
+    <section class="content">
+      <div class="toolbar">
+        <div>
+          <label>مرتب‌سازی:
+            <select id="sortBy">
+              <option value="popular">پربازدید</option>
+              <option value="price-asc">قیمت ↑</option>
+              <option value="price-desc">قیمت ↓</option>
+              <option value="rating">بیشترین امتیاز</option>
+            </select>
+          </label>
+        </div>
+        <div id="resultsInfo"></div>
+      </div>
+
+      <section id="productGrid" class="product-grid"></section>
+
+      <div id="pagination" class="pagination"></div>
+    </section>
+  </main>
+
+  <!-- Modal جزئیات / Quick View -->
+  <div id="modal" class="modal hidden"></div>
+
+  <!-- سبد خرید (Modal) -->
+  <div id="cartModal" class="modal hidden">
+    <div class="card small">
+      <button class="close-btn" onclick="closeCart()">✕</button>
+      <h3>سبد خرید</h3>
+      <div id="cartItems"></div>
+      <div id="cartTotal"></div>
+      <div class="cart-actions">
+        <button class="btn" onclick="checkoutCart()">تسویه</button>
+        <button class="btn secondary" onclick="clearCart()">خالی کردن</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- مقایسه (Modal) -->
+  <div id="compareModal" class="modal hidden">
+    <div class="card large">
+      <button class="close-btn" onclick="closeCompare()">✕</button>
+      <h3>مقایسه محصولات</h3>
+      <div id="compareList"></div>
+    </div>
+  </div>
+
+  <script src="shop.js"></script>
+</body>
+    </html>
+    

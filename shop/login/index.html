@@ -7,6 +7,11 @@
 </head>
 <body>
   <div class="form-container">
+    <div class="toggle-buttons">
+      <button id="showLogin">ورود</button>
+      <button id="showSignup">ثبت‌نام</button>
+    </div>
+
     <form id="loginForm">
       <h2>ورود</h2>
       <input type="text" id="loginUsername" placeholder="نام کاربری" required>
@@ -15,9 +20,7 @@
       <p id="loginMessage"></p>
     </form>
 
-    <hr>
-
-    <form id="signupForm">
+    <form id="signupForm" style="display: none;">
       <h2>ثبت‌نام</h2>
       <input type="text" id="signupUsername" placeholder="نام کاربری" required>
       <input type="email" id="signupEmail" placeholder="ایمیل" required>

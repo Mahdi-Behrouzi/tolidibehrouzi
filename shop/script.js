@@ -156,3 +156,26 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+// مدیریت نمایش دکمه‌های ورود و خروج
+document.addEventListener("DOMContentLoaded", () => {
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (!loginBtn || !logoutBtn) return;
+
+  const user = localStorage.getItem("loggedInUser");
+
+  if (user) {
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+  } else {
+    loginBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
+  }
+
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("loggedInUser");
+    alert("با موفقیت خارج شدید");
+    location.reload();
+  });
+});

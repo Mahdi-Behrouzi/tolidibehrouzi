@@ -50,3 +50,13 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
     }
   });
 });
+// دکمه‌های تعویض فرم
+document.getElementById("showLogin").addEventListener("click", function() {
+  document.getElementById("loginForm").style.display = "block";
+  document.getElementById("signupForm").style.display = "none";
+});
+
+document.getElementById("showSignup").addEventListener("click", function() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("signupForm").style.display = "block";
+});

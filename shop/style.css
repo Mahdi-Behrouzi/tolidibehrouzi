@@ -145,6 +145,32 @@ body {
     background-color: #f5f5f5;
     color: #ef4056;
 }
+/* دکمه ورود و خروج در منو */
+.logout-btn {
+  display: none;
+  background-color: #d81b60;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-family: inherit;
+}
+
+.logout-btn:hover {
+  background-color: #ad1457;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+nav a:hover {
+  color: #d81b60;
+}
 
 /* Banner */
 .banner {

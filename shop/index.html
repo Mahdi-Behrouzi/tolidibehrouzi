@@ -47,6 +47,96 @@
         </div>
     </header>
 
+<!-- این کد رو بعد از تگ </header> و قبل از <!-- Banner --> اضافه کن -->
+
+<!-- Modal ورود/ثبت‌نام -->
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        
+        <!-- فرم ورود -->
+        <div id="loginForm" class="auth-form">
+            <h2>ورود به حساب کاربری</h2>
+            <input type="email" id="loginEmail" placeholder="ایمیل" required>
+            <input type="password" id="loginPassword" placeholder="رمز عبور" required>
+            <button onclick="login()">ورود</button>
+            <p class="switch-form">حساب کاربری ندارید؟ <a href="#" onclick="showRegisterForm()">ثبت‌نام کنید</a></p>
+        </div>
+
+        <!-- فرم ثبت‌نام -->
+        <div id="registerForm" class="auth-form" style="display: none;">
+            <h2>ثبت‌نام</h2>
+            <input type="text" id="registerName" placeholder="نام و نام خانوادگی" required>
+            <input type="email" id="registerEmail" placeholder="ایمیل" required>
+            <input type="tel" id="registerPhone" placeholder="شماره موبایل" required>
+            <input type="password" id="registerPassword" placeholder="رمز عبور" required>
+            <input type="password" id="registerPasswordConfirm" placeholder="تکرار رمز عبور" required>
+            <button onclick="register()">ثبت‌نام</button>
+            <p class="switch-form">حساب کاربری دارید؟ <a href="#" onclick="showLoginForm()">وارد شوید</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- پنل کاربری -->
+<div id="userPanel" class="modal">
+    <div class="modal-content panel-content">
+        <span class="close" id="closePanelModal">&times;</span>
+        
+        <div class="panel-header">
+            <h2>پنل کاربری</h2>
+            <button onclick="logout()" class="logout-btn">خروج</button>
+        </div>
+
+        <div class="panel-tabs">
+            <button class="tab-btn active" onclick="showTab('profile')">پروفایل</button>
+            <button class="tab-btn" onclick="showTab('orders')">سفارشات من</button>
+            <button class="tab-btn" onclick="showTab('cart')">سبد خرید</button>
+        </div>
+
+        <!-- تب پروفایل -->
+        <div id="profileTab" class="tab-content active">
+            <div class="profile-info">
+                <h3>اطلاعات کاربری</h3>
+                <div class="info-row">
+                    <span class="label">نام:</span>
+                    <span id="profileName"></span>
+                </div>
+                <div class="info-row">
+                    <span class="label">ایمیل:</span>
+                    <span id="profileEmail"></span>
+                </div>
+                <div class="info-row">
+                    <span class="label">موبایل:</span>
+                    <span id="profilePhone"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- تب سفارشات -->
+        <div id="ordersTab" class="tab-content">
+            <h3>سفارشات من</h3>
+            <div id="ordersList">
+                <p class="empty-message">هنوز سفارشی ثبت نکرده‌اید</p>
+            </div>
+        </div>
+
+        <!-- تب سبد خرید -->
+        <div id="cartTab" class="tab-content">
+            <h3>سبد خرید</h3>
+            <div id="cartItems">
+                <p class="empty-message">سبد خرید شما خالی است</p>
+            </div>
+            <div id="cartSummary" style="display: none;">
+                <div class="cart-total">
+                    <span>جمع کل:</span>
+                    <span id="totalPrice">0 تومان</span>
+                </div>
+                <button onclick="checkout()" class="checkout-btn">تکمیل خرید</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    
     <!-- Banner -->
     <section class="banner">
         <div class="container">

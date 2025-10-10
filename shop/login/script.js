@@ -1,45 +1,52 @@
-$(ffunctionunction(){
-  
-  function toggleView(){
-    $('.login').toggleClass('is-active');
-    $('.register').toggleClass('is-active');
-    $('.sign-up-toggle').toggleClass('is-active');
-    $('.login-toggle').toggleClass('is-active');
-  }
-  
-  function slideElements(prop){
-    $(prop.showEle).removeClass(prop.removeShowClass);
-    $(prop.showEle).addClass(prop.addShowClass);
-    $(prop.hideEle).removeClass(prop.removeHideClass);
-    $(prop.hideEle).addClass(prop.addHideClass);
-  }
-  
-  $('.sign-up-toggle a').on('click',function(){
-    toggleView();
-    $('.login-view-toggle').addClass('move-top');
-    $('.login-view-toggle').removeClass('move-bottom');
-    slideElements({
-      showEle: '.register',
-      removeShowClass: 'down',
-      addShowClass: 'pull-up',
-      hideEle: '.login',
-      addHideClass: 'up',
-      removeHideClass: 'push-down'
-    });
+// تنظیمات Firebase
+const firebaseConfig = {
+  apiKey: "اینجا API KEY خودتو بذار",
+  authDomain: "tolidibehrouzi.firebaseapp.com",
+  databaseURL: "https://tolidibehrouzi-e1ae3-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "tolidibehrouzi",
+  storageBucket: "tolidibehrouzi.appspot.com",
+  messagingSenderId: "شماره فرستنده",
+  appId: "شناسه اپلیکیشن"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// ثبت‌نام
+document.getElementById("signupForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const username = document.getElementById("signupUsername").value;
+  const email = document.getElementById("signupEmail").value;
+  const password = document.getElementById("signupPassword").value;
+
+  db.ref("users").push({
+    username: username,
+    email: email,
+    password: password
   });
-  
-  $('.login-toggle a').on('click',function(){
-    toggleView();
-    $('.login-view-toggle').addClass('move-bottom');
-    $('.login-view-toggle').removeClass('move-top');
-    slideElements({
-      showEle: '.login',
-      removeShowClass: 'up',
-      addShowClass: 'push-down',
-      hideEle: '.register',
-      addHideClass: 'down',
-      removeHideClass: 'pull-up'
+
+  document.getElementById("signupMessage").textContent = "ثبت‌نام با موفقیت انجام شد!";
+});
+
+// ورود
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const username = document.getElementById("loginUsername").value;
+  const password = document.getElementById("loginPassword").value;
+
+  db.ref("users").once("value", function(snapshot) {
+    let found = false;
+    snapshot.forEach(function(child) {
+      const data = child.val();
+      if (data.username === username && data.password === password) {
+        found = true;
+      }
     });
+
+    if (found) {
+      document.getElementById("loginMessage").textContent = "ورود موفق!";
+    } else {
+      document.getElementById("loginMessage").textContent = "نام کاربری یا رمز اشتباه است.";
+    }
   });
-  
 });

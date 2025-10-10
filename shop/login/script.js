@@ -1,3 +1,13 @@
+// دکمه‌های تعویض فرم
+document.getElementById("showLogin").addEventListener("click", function() {
+  document.getElementById("loginForm").style.display = "block";
+  document.getElementById("signupForm").style.display = "none";
+});
+
+document.getElementById("showSignup").addEventListener("click", function() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("signupForm").style.display = "block";
+});
 // تنظیمات Firebase
 const firebaseConfig = {
   apiKey: "اینجا API KEY خودتو بذار",
@@ -49,14 +59,4 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
       document.getElementById("loginMessage").textContent = "نام کاربری یا رمز اشتباه است.";
     }
   });
-});
-// دکمه‌های تعویض فرم
-document.getElementById("showLogin").addEventListener("click", function() {
-  document.getElementById("loginForm").style.display = "block";
-  document.getElementById("signupForm").style.display = "none";
-});
-
-document.getElementById("showSignup").addEventListener("click", function() {
-  document.getElementById("loginForm").style.display = "none";
-  document.getElementById("signupForm").style.display = "block";
 });

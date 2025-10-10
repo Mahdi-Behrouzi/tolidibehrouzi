@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>ورود / ثبت‌نام</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="form-container">
-    <div class="toggle-buttons">
-      <button id="showLogin">ورود</button>
-      <button id="showSignup">ثبت‌نام</button>
+  <div class="container">
+    <div class="switcher">
+      <button id="btnLogin" class="active">ورود</button>
+      <button id="btnSignup">ثبت‌نام</button>
     </div>
 
-    <form id="loginForm">
+    <form id="loginForm" class="form active">
       <h2>ورود</h2>
       <input type="text" id="loginUsername" placeholder="نام کاربری" required>
       <input type="password" id="loginPassword" placeholder="رمز عبور" required>
@@ -20,7 +21,7 @@
       <p id="loginMessage"></p>
     </form>
 
-    <form id="signupForm" style="display: none;">
+    <form id="signupForm" class="form">
       <h2>ثبت‌نام</h2>
       <input type="text" id="signupUsername" placeholder="نام کاربری" required>
       <input type="email" id="signupEmail" placeholder="ایمیل" required>

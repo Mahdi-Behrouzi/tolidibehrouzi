@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فروشگاه آنلاین</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="right-section">
+                    <h1 class="logo">فروشگاه</h1>
+                    <div class="search-box">
+                        <input type="text" placeholder="جستجو در محصولات...">
+                        <span class="search-icon">🔍</span>
+                    </div>
+                </div>
+                
+                <div class="left-section">
+                    <button class="login-btn">
+                        <span>👤</span>
+                        <span>ورود | ثبت‌نام</span>
+                    </button>
+                    <button class="cart-btn">
+                        <span>🛒</span>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <nav class="categories">
+                <button class="category-btn">☰ دسته‌بندی</button>
+                <button class="category-btn">موبایل</button>
+                <button class="category-btn">لپتاپ</button>
+                <button class="category-btn">لوازم خانگی</button>
+                <button class="category-btn">مد و پوشاک</button>
+                <button class="category-btn">کتاب</button>
+                <button class="category-btn">اسباب بازی</button>
+                <button class="category-btn">زیبایی و سلامت</button>
+                <button class="category-btn">ورزش</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <section class="banner">
+        <div class="container">
+            <h2>تخفیف‌های ویژه</h2>
+            <p>تا ۵۰٪ تخفیف روی محصولات منتخب</p>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <main class="main">
+        <div class="container">
+            <h3 class="section-title">محصولات پیشنهادی</h3>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&h=300&fit=crop" alt="گوشی سامسونگ">
+                    <h4>گوشی سامسونگ A54</h4>
+                    <div class="product-footer">
+                        <span class="price">12,500,000 تومان</span>
+                        <button class="add-btn" onclick="addToCart()">افزودن</button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300&h=300&fit=crop" alt="لپتاپ">
+                    <h4>لپتاپ لنوو IdeaPad</h4>
+                    <div class="product-footer">
+                        <span class="price">28,900,000 تومان</span>
+                        <button class="add-btn" onclick="addToCart()">افزودن</button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=300&fit=crop" alt="هدفون">
+                    <h4>هدفون بلوتوثی</h4>
+                    <div class="product-footer">
+                        <span class="price">850,000 تومان</span>
+                        <button class="add-btn" onclick="addToCart()">افزودن</button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop" alt="ساعت">
+                    <h4>ساعت هوشمند</h4>
+                    <div class="product-footer">
+                        <span class="price">3,200,000 تومان</span>
+                        <button class="add-btn" onclick="addToCart()">افزودن</button>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=300&h=300&fit=crop" alt="کیف">
+                    <h4>کیف چرمی</h4>
+                    <div class="product-footer">
+                        <span class="price">1,450,000 تومان</span>
+                        <button class="add-btn" onclick="addToCart()">افزودن</button>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=300&h=300&fit=crop" alt="دوربین">
+                    <h4>دوربین دیجیتال</h4>
+                    <div class="product-footer">
+                        <span class="price">18,500,000 تومان</span>
+                        <button class="add-btn" onclick="addToCart()">افزودن</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- About -->
+                <div class="footer-col">
+                    <h4>درباره ما</h4>
+                    <p>فروشگاه اینترنتی با بیش از ۱۰۰ هزار محصول متنوع و ارسال سریع به سراسر کشور</p>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-col">
+                    <h4>خدمات مشتریان</h4>
+                    <ul>
+                        <li><a href="#">پاسخ به پرسش‌ها</a></li>
+                        <li><a href="#">رویه‌های بازگرداندن</a></li>
+                        <li><a href="#">شیوه‌های پرداخت</a></li>
+                        <li><a href="#">راهنمای خرید</a></li>
+                    </ul>
+                </div>
+
+                <!-- Guide -->
+                <div class="footer-col">
+                    <h4>راهنمای خرید</h4>
+                    <ul>
+                        <li><a href="#">نحوه ثبت سفارش</a></li>
+                        <li><a href="#">رویه ارسال</a></li>
+                        <li><a href="#">شیوه‌های پرداخت</a></li>
+                        <li><a href="#">قوانین و مقررات</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="footer-col">
+                    <h4>تماس با ما</h4>
+                    <ul>
+                        <li>📞 ۰۲۱-۱۲۳۴۵۶۷۸</li>
+                        <li>📧 info@shop.com</li>
+                        <li>📍 تهران، خیابان ولیعصر</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© ۱۴۰۳ تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+  </html>

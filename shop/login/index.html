@@ -2,21 +2,33 @@
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
-  <title>ورود</title>
+  <title>ورود / ثبت‌نام</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="form-container">
     <form id="loginForm">
       <h2>ورود</h2>
-      <input type="text" id="username" placeholder="نام کاربری" required>
-      <input type="password" id="password" placeholder="رمز عبور" required>
+      <input type="text" id="loginUsername" placeholder="نام کاربری" required>
+      <input type="password" id="loginPassword" placeholder="رمز عبور" required>
       <button type="submit">ورود</button>
-      <p id="message"></p>
-      <a href="../signup.html">ثبت‌نام</a>
+      <p id="loginMessage"></p>
+    </form>
+
+    <hr>
+
+    <form id="signupForm">
+      <h2>ثبت‌نام</h2>
+      <input type="text" id="signupUsername" placeholder="نام کاربری" required>
+      <input type="email" id="signupEmail" placeholder="ایمیل" required>
+      <input type="password" id="signupPassword" placeholder="رمز عبور" required>
+      <button type="submit">ثبت‌نام</button>
+      <p id="signupMessage"></p>
     </form>
   </div>
-  <script src="../firebase.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

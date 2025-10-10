@@ -46,7 +46,6 @@ signupForm.addEventListener("submit", function(e) {
   }
 });
 
-// ورود
 loginForm.addEventListener("submit", function(e) {
   e.preventDefault();
   const username = document.getElementById("loginUsername").value;
@@ -62,9 +61,14 @@ loginForm.addEventListener("submit", function(e) {
         }
       });
 
-      document.getElementById("loginMessage").textContent = found
-        ? "ورود موفق!"
-        : "نام کاربری یا رمز اشتباه است.";
+      if (found) {
+        document.getElementById("loginMessage").textContent = "ورود موفق!";
+        setTimeout(() => {
+          window.location.href = "../index.html"; // ← مسیر صفحه اصلی
+        }, 1000); // یک ثانیه تأخیر برای نمایش پیام
+      } else {
+        document.getElementById("loginMessage").textContent = "نام کاربری یا رمز اشتباه است.";
+      }
     })
     .catch(error => {
       console.error("خطا در اتصال:", error);

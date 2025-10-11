@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود و ثبت‌نام</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container" id="container">
+        <!-- فرم ورود -->
+        <div class="form-container sign-in-container">
+            <form id="loginForm">
+                <h1>ورود</h1>
+                <input type="email" id="loginEmail" placeholder="ایمیل" required />
+                <input type="password" id="loginPassword" placeholder="رمز عبور" required />
+                <button type="submit">ورود</button>
+            </form>
+        </div>
+
+        <!-- فرم ثبت‌نام -->
+        <div class="form-container sign-up-container">
+            <form id="registerForm">
+                <h1>ثبت‌نام</h1>
+                <input type="text" id="registerName" placeholder="نام و نام خانوادگی" required />
+                <input type="email" id="registerEmail" placeholder="ایمیل" required />
+                <input type="tel" id="registerPhone" placeholder="شماره موبایل" required />
+                <input type="password" id="registerPassword" placeholder="رمز عبور" required />
+                <input type="password" id="registerPasswordConfirm" placeholder="تکرار رمز عبور" required />
+                <button type="submit">ثبت‌نام</button>
+            </form>
+        </div>
+
+        <!-- پنل سمت راست -->
+        <div class="panel-container">
+            <div class="panel sign-up-panel">
+                <h1>خوش آمدید!</h1>
+                <p>برای دسترسی به حساب خود وارد شوید</p>
+                <button class="ghost panel-btn" id="signIn">ورود</button>
+            </div>
+            <div class="panel sign-in-panel" style="display: none;">
+                <h1>سلام!</h1>
+                <p>اگر حساب کاربری ندارید می‌توانید یک حساب جدید ایجاد کنید</p>
+                <button class="ghost panel-btn" id="signUp">ثبت‌نام</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود و ثبت‌نام</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="container">
+        <!-- فرم ورود -->
+        <div class="form-container sign-in-container">
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <h1>ورود</h1>
+                <input type="email" placeholder="ایمیل" id="loginEmail" required />
+                <input type="password" placeholder="رمز عبور" id="loginPassword" required />
+                <button type="submit">ورود</button>
+                <p class="toggle-text">حساب کاربری ندارید؟ <a href="#" onclick="togglePanel(event)">ثبت‌نام</a></p>
+            </form>
+        </div>
+
+        <!-- فرم ثبت‌نام -->
+        <div class="form-container sign-up-container">
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <h1>ثبت‌نام</h1>
+                <input type="text" placeholder="نام و نام خانوادگی" id="registerName" required />
+                <input type="email" placeholder="ایمیل" id="registerEmail" required />
+                <input type="tel" placeholder="شماره موبایل" id="registerPhone" required />
+                <input type="password" placeholder="رمز عبور" id="registerPassword" required />
+                <input type="password" placeholder="تکرار رمز عبور" id="registerPasswordConfirm" required />
+                <button type="submit">ثبت‌نام</button>
+                <p class="toggle-text">حساب کاربری دارید؟ <a href="#" onclick="togglePanel(event)">ورود</a></p>
+            </form>
+        </div>
+
+        <!-- پنل سمت راست -->
+        <div class="panel-container">
+            <div id="signUpPanel" class="panel-content">
+                <h1>خوش آمدید!</h1>
+                <p>برای دسترسی به حساب خود وارد شوید</p>
+                <button class="panel-btn" onclick="togglePanel()">ورود</button>
+            </div>
+            <div id="signInPanel" class="panel-content" style="display: none;">
+                <h1>سلام!</h1>
+                <p>اگر حساب کاربری ندارید می‌توانید یک حساب جدید ایجاد کنید</p>
+                <button class="panel-btn" onclick="togglePanel()">ثبت‌نام</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

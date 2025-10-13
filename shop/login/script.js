@@ -1,24 +1,21 @@
 const container = document.getElementById('container');
-const signUpBtn = document.getElementById('signUp');
-const signInBtn = document.getElementById('signIn');
-const loginForm = document.getElementById('loginForm');
-const registerForm = document.getElementById('registerForm');
 
-// تغییر صفحات
-signUpBtn.addEventListener('click', () => {
-    container.classList.add('right-panel-active');
-});
+function togglePanel(event) {
+    if (event && event.preventDefault) {
+        event.preventDefault();
+    }
+    
+    container.classList.toggle('right-panel-active');
+    
+    const signUpPanel = document.getElementById('signUpPanel');
+    const signInPanel = document.getElementById('signInPanel');
+    
+    signUpPanel.style.display = signUpPanel.style.display === 'none' ? 'block' : 'none';
+    signInPanel.style.display = signInPanel.style.display === 'none' ? 'block' : 'none';
+}
 
-signInBtn.addEventListener('click', () => {
-    container.classList.remove('right-panel-active');
-});
-
-// ذخیره‌سازی کاربران
-let users = JSON.parse(localStorage.getItem('users')) || {};
-
-// ثبت‌نام
-registerForm.addEventListener('submit', function(e) {
-    e.preventDefault();
+function handleRegister(event) {
+    event.preventDefault();
 
     const name = document.getElementById('registerName').value.trim();
     const email = document.getElementById('registerEmail').value.trim();
@@ -26,7 +23,7 @@ registerForm.addEventListener('submit', function(e) {
     const password = document.getElementById('registerPassword').value;
     const confirmPassword = document.getElementById('registerPasswordConfirm').value;
 
-    if (!name || !email || !phone || !password) {
+    if (!name || !email || !phone || !password || !confirmPassword) {
         alert('لطفاً تمام فیلدها را پر کنید');
         return;
     }
@@ -35,6 +32,8 @@ registerForm.addEventListener('submit', function(e) {
         alert('رمز عبور و تکرار آن یکسان نیستند');
         return;
     }
+
+    let users = JSON.parse(localStorage.getItem('users')) || {};
 
     if (users[email]) {
         alert('این ایمیل قبلاً ثبت شده است');
@@ -51,15 +50,17 @@ registerForm.addEventListener('submit', function(e) {
     };
 
     localStorage.setItem('users', JSON.stringify(users));
-    alert('ثبت‌نام با موفقیت انجام شد! الآن می‌توانید وارد شوید');
+    alert('ثبت‌نام موفق! الآن وارد شوید');
 
-    registerForm.reset();
+    document.getElementById('registerForm').reset();
     container.classList.remove('right-panel-active');
-});
+    
+    document.getElementById('signUpPanel').style.display = 'block';
+    document.getElementById('signInPanel').style.display = 'none';
+}
 
-// ورود
-loginForm.addEventListener('submit', function(e) {
-    e.preventDefault();
+function handleLogin(event) {
+    event.preventDefault();
 
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value;
@@ -69,6 +70,7 @@ loginForm.addEventListener('submit', function(e) {
         return;
     }
 
+    let users = JSON.parse(localStorage.getItem('users')) || {};
     const user = users[email];
 
     if (!user) {
@@ -83,8 +85,7 @@ loginForm.addEventListener('submit', function(e) {
 
     localStorage.setItem('currentUser', JSON.stringify(user));
     alert('خوش آمدید ' + user.name);
-    loginForm.reset();
-    
-    // ریدایرکت به صفحه اصلی فروشگاه
-    window.location.href = 'index.html';
-});
+
+    document.getElementById('loginForm').reset();
+    window.location.href = 'shop.html';
+}

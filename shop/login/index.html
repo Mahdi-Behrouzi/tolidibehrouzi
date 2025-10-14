@@ -10,18 +10,18 @@
     <div class="container" id="container">
         <!-- فرم ورود -->
         <div class="form-container sign-in-container">
-            <form id="loginForm" onsubmit="handleLogin(event)">
+            <form id="loginForm">
                 <h1>ورود</h1>
                 <input type="email" placeholder="ایمیل" id="loginEmail" required />
                 <input type="password" placeholder="رمز عبور" id="loginPassword" required />
                 <button type="submit">ورود</button>
-                <p class="toggle-text">حساب کاربری ندارید؟ <a href="#" onclick="togglePanel(event)">ثبت‌نام</a></p>
+                <p class="toggle-text toggle-register">حساب ندارید؟ <a onclick="togglePanel()">ثبت‌نام</a></p>
             </form>
         </div>
 
         <!-- فرم ثبت‌نام -->
         <div class="form-container sign-up-container">
-            <form id="registerForm" onsubmit="handleRegister(event)">
+            <form id="registerForm">
                 <h1>ثبت‌نام</h1>
                 <input type="text" placeholder="نام و نام خانوادگی" id="registerName" required />
                 <input type="email" placeholder="ایمیل" id="registerEmail" required />
@@ -29,7 +29,7 @@
                 <input type="password" placeholder="رمز عبور" id="registerPassword" required />
                 <input type="password" placeholder="تکرار رمز عبور" id="registerPasswordConfirm" required />
                 <button type="submit">ثبت‌نام</button>
-                <p class="toggle-text">حساب کاربری دارید؟ <a href="#" onclick="togglePanel(event)">ورود</a></p>
+                <p class="toggle-text toggle-login">حساب دارید؟ <a onclick="togglePanel()">وارد شوید</a></p>
             </form>
         </div>
 
@@ -42,7 +42,7 @@
             </div>
             <div id="signInPanel" class="panel-content" style="display: none;">
                 <h1>سلام!</h1>
-                <p>اگر حساب کاربری ندارید می‌توانید یک حساب جدید ایجاد کنید</p>
+                <p>حساب جدید ایجاد کنید</p>
                 <button class="panel-btn" onclick="togglePanel()">ثبت‌نام</button>
             </div>
         </div>

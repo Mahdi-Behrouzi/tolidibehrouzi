@@ -228,16 +228,31 @@ button[type="submit"]:hover {
         border-radius: 0;
     }
 
-    .form-container,
-    .panel-container {
+    .form-container {
         width: 100%;
         position: relative;
     }
 
+    .sign-in-container,
+    .sign-up-container {
+        width: 100%;
+        position: absolute;
+    }
+
+    .container.right-panel-active .sign-in-container {
+        display: none;
+    }
+
+    .container.right-panel-active .sign-up-container {
+        display: flex;
+        transform: none;
+    }
+
     .panel-container {
-        transform: translateY(0);
-        position: relative;
-        height: auto;
-        min-height: 250px;
+        display: none;
+    }
+
+    form {
+        padding: 20px;
     }
 }

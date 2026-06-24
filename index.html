@@ -72,23 +72,95 @@
   <img src="img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۲۱۴.jpg" class="slide" alt="slide3">
   <img src="img/IMG_20240302_195417.jpg" class="slide" alt="slide4">
 </div>
-
-<div id="pos-article-display-108918"></div>
-<div class="product-card">
-  <div class="img-placeholder">
-    <!-- عکس محصول -->
-    <button class="wishlist-btn"><i class="ti ti-heart"></i></button>
-    <button class="cart-btn"><i class="ti ti-shopping-cart"></i></button>
+<div class="shop-header">
+  <div class="shop-title">
+    <i>&#8249;</i>
+    کت شلوار
   </div>
-  <div class="product-info">
-    <div class="color-dots">
-      <div class="dot active" style="background:#222;"></div>
-      <div class="dot" style="background:#ccc;"></div>
+  <button class="see-all-btn">مشاهده همه</button>
+</div>
+
+<div class="slider-wrapper">
+  <div class="slider-track" id="track">
+
+    <div class="product-card">
+      <div class="img-wrap">
+        <img src="img/عکس نوشته ساز_1663151402523.png" alt="slide1">
+        <button class="wishlist-btn" onclick="toggleWish(this)">♡</button>
+        <button class="cart-btn">🛒</button>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <div class="dot active" style="background:#3b2a1a;"></div>
+          <div class="dot" style="background:#444;"></div>
+          <div class="dot" style="background:#1a3a6b;"></div>
+        </div>
+        <div class="product-name">کت شلوار تک رنگ</div>
+        <div class="product-price">۷٬۳۵۰٬۰۰۰ تومان</div>
+      </div>
     </div>
-    <div class="product-name">نام محصول</div>
-    <div class="product-price">۹٬۳۸۰٬۰۰۰ تومان</div>
+
+    <div class="product-card">
+      <div class="img-wrap">
+        <img src="img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۴۵۳.jpg" alt="slide2">
+        <button class="wishlist-btn" onclick="toggleWish(this)">♡</button>
+        <button class="cart-btn">🛒</button>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <div class="dot active" style="background:#222;"></div>
+          <div class="dot" style="background:#ccc; border-color:#aaa;"></div>
+          <div class="dot" style="background:#1c3a5e;"></div>
+          <div class="dot" style="background:#555;"></div>
+        </div>
+        <div class="product-name">ست کت و شلوار اسپرینگ</div>
+        <div class="product-price">۹٬۳۸۰٬۰۰۰ تومان</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="img-wrap">
+        <img src="img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۲۱۴.jpg" alt="slide3">
+        <button class="wishlist-btn" onclick="toggleWish(this)">♡</button>
+        <button class="cart-btn">🛒</button>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <div class="dot active" style="background:#6b3a2a;"></div>
+          <div class="dot" style="background:#888;"></div>
+        </div>
+        <div class="product-name">کت شلوار کلاسیک</div>
+        <div class="product-price">۸٬۱۰۰٬۰۰۰ تومان</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="img-wrap">
+        <img src="img/IMG_20240302_195417.jpg" alt="slide4">
+        <button class="wishlist-btn" onclick="toggleWish(this)">♡</button>
+        <button class="cart-btn">🛒</button>
+      </div>
+      <div class="product-info">
+        <div class="color-dots">
+          <div class="dot active" style="background:#2c3e50;"></div>
+          <div class="dot" style="background:#7f8c8d;"></div>
+          <div class="dot" style="background:#222;"></div>
+        </div>
+        <div class="product-name">کت شلوار اداری</div>
+        <div class="product-price">۶٬۹۵۰٬۰۰۰ تومان</div>
+      </div>
+    </div>
+
   </div>
 </div>
+
+<div class="slider-dots">
+  <div class="sdot active" onclick="goTo(0)"></div>
+  <div class="sdot" onclick="goTo(1)"></div>
+</div>
+            
+(تگ یکتانت)
+<div id="pos-article-display-108918"></div>
             
   <section id="products">
     <h2>محصولات</h2>

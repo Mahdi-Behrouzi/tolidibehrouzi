@@ -5,11 +5,11 @@
 }
 
 body {
-  font-family: Tahoma, sans-serif;
+  font-family: Tahoma;
   background: #f5f5f5;
 }
 
-/* header */
+/* HEADER */
 .shop-header {
   display: flex;
   justify-content: space-between;
@@ -17,45 +17,51 @@ body {
   direction: rtl;
 }
 
-.shop-title {
-  display: flex;
-  gap: 6px;
-  font-size: 15px;
-}
-
-.see-all-btn {
-  font-size: 13px;
-  background: transparent;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 5px 12px;
-  cursor: pointer;
-}
-
-/* slider */
+/* WRAPPER */
 .slider-wrapper {
-  overflow: hidden;
-  padding: 0 16px 16px;
+  position: relative;
+  padding: 0 16px 25px;
 }
 
+/* TRACK */
 .slider-track {
   display: flex;
   gap: 12px;
-  transition: transform 0.4s ease;
-  will-change: transform;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 
-  direction: ltr; /* مهم: اینو عوض کن */
+  padding: 10px 0;
 }
 
-/* card */
+.slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* CARD */
 .product-card {
-  flex: 0 0 calc(50% - 6px);
+  flex: 0 0 75%;
+  scroll-snap-align: center;
   background: #fff;
-  border-radius: 12px;
+  border-radius: 18px;
   overflow: hidden;
+
+  transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s;
+  transform: scale(0.92);
+  opacity: 0.6;
+  filter: blur(1px);
 }
 
-/* image */
+/* کارت فعال (وسط) */
+.product-card.active {
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* IMAGE */
 .img-wrap {
   position: relative;
   aspect-ratio: 3/4;
@@ -67,17 +73,16 @@ body {
   object-fit: cover;
 }
 
-/* buttons */
+/* BUTTONS */
 .wishlist-btn {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   border: none;
   background: #fff;
-  cursor: pointer;
 }
 
 .wishlist-btn.active {
@@ -88,16 +93,15 @@ body {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: rgba(0,0,0,0.7);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.75);
   color: #fff;
   border: none;
-  cursor: pointer;
 }
 
-/* info */
+/* INFO */
 .product-info {
   padding: 10px;
   direction: rtl;
@@ -121,33 +125,23 @@ body {
   border: 2px solid #000;
 }
 
-.product-name {
-  font-size: 13px;
-  margin-bottom: 4px;
-}
-
-.product-price {
-  font-size: 13px;
-  color: #666;
-}
-
-/* dots nav */
+/* NAV DOTS */
 .slider-dots {
   display: flex;
   justify-content: center;
   gap: 6px;
-  padding-bottom: 12px;
+  margin-top: 12px;
 }
 
 .sdot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #ccc;
-  cursor: pointer;
+  transition: 0.3s;
 }
 
 .sdot.active {
-  background: #333;
-  transform: scale(1.3);
+  background: #111;
+  transform: scale(1.4);
 }

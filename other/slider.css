@@ -1,10 +1,15 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   font-family: Tahoma, sans-serif;
   background: #f5f5f5;
 }
 
+/* header */
 .shop-header {
   display: flex;
   justify-content: space-between;
@@ -24,8 +29,10 @@ body {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 5px 12px;
+  cursor: pointer;
 }
 
+/* slider */
 .slider-wrapper {
   overflow: hidden;
   padding: 0 16px 16px;
@@ -34,11 +41,12 @@ body {
 .slider-track {
   display: flex;
   gap: 12px;
-  transition: transform 0.35s ease;
-  direction: rtl;
+  transition: transform 0.4s ease;
   will-change: transform;
+  direction: rtl;
 }
 
+/* card */
 .product-card {
   flex: 0 0 calc(50% - 6px);
   background: #fff;
@@ -46,6 +54,7 @@ body {
   overflow: hidden;
 }
 
+/* image */
 .img-wrap {
   position: relative;
   aspect-ratio: 3/4;
@@ -57,6 +66,7 @@ body {
   object-fit: cover;
 }
 
+/* buttons */
 .wishlist-btn {
   position: absolute;
   top: 10px;
@@ -66,9 +76,12 @@ body {
   border-radius: 50%;
   border: none;
   background: #fff;
+  cursor: pointer;
 }
 
-.wishlist-btn.active { color: red; }
+.wishlist-btn.active {
+  color: red;
+}
 
 .cart-btn {
   position: absolute;
@@ -80,8 +93,10 @@ body {
   background: rgba(0,0,0,0.7);
   color: #fff;
   border: none;
+  cursor: pointer;
 }
 
+/* info */
 .product-info {
   padding: 10px;
   direction: rtl;
@@ -98,6 +113,7 @@ body {
   height: 14px;
   border-radius: 50%;
   border: 1px solid #ddd;
+  cursor: pointer;
 }
 
 .dot.active {
@@ -114,6 +130,7 @@ body {
   color: #666;
 }
 
+/* dots nav */
 .slider-dots {
   display: flex;
   justify-content: center;
@@ -126,6 +143,7 @@ body {
   height: 6px;
   border-radius: 50%;
   background: #ccc;
+  cursor: pointer;
 }
 
 .sdot.active {

@@ -2,13 +2,10 @@ const track = document.getElementById('track');
 const dots = document.querySelectorAll('.sdot');
 
 let page = 0;
-
-function getPerPage() {
-  return 2; // چون هر صفحه 2 تا کارت داری
-}
+const perPage = 2;
 
 function getPages() {
-  return Math.ceil(track.children.length / getPerPage());
+  return Math.ceil(track.children.length / perPage);
 }
 
 function goTo(p) {
@@ -17,46 +14,54 @@ function goTo(p) {
   page = Math.max(0, Math.min(p, pages - 1));
 
   const card = track.children[0];
-  const cardW = card.offsetWidth + 12;
+  const cardWidth = card.offsetWidth + 12;
 
-  track.style.transform = `translateX(-${page * (cardW * getPerPage())}px)`;
+  const moveX = page * cardWidth * perPage;
 
-  dots.forEach((d, i) => d.classList.toggle('active', i === page));
+  track.style.transform = `translateX(-${moveX}px)`;
+
+  dots.forEach((d, i) => {
+    d.classList.toggle('active', i === page);
+  });
 }
 
-// swipe موبایل
+/* touch swipe */
 let startX = 0;
 
 track.addEventListener('touchstart', e => {
   startX = e.touches[0].clientX;
-}, { passive: true });
+});
 
 track.addEventListener('touchend', e => {
-  let dx = e.changedTouches[0].clientX - startX;
+  const dx = e.changedTouches[0].clientX - startX;
+
   if (Math.abs(dx) > 40) {
     goTo(page + (dx < 0 ? 1 : -1));
   }
 });
 
-// mouse drag
+/* mouse drag */
 let mx = 0;
 
-track.addEventListener('mousedown', e => mx = e.clientX);
+track.addEventListener('mousedown', e => {
+  mx = e.clientX;
+});
 
 track.addEventListener('mouseup', e => {
-  let dx = e.clientX - mx;
+  const dx = e.clientX - mx;
+
   if (Math.abs(dx) > 40) {
     goTo(page + (dx < 0 ? 1 : -1));
   }
 });
 
-// wishlist
+/* wishlist */
 function toggleWish(btn) {
   btn.classList.toggle('active');
   btn.textContent = btn.classList.contains('active') ? '♥' : '♡';
 }
 
-// رنگ‌ها
+/* color dots */
 document.querySelectorAll('.color-dots').forEach(group => {
   group.querySelectorAll('.dot').forEach(dot => {
     dot.addEventListener('click', () => {
@@ -66,5 +71,5 @@ document.querySelectorAll('.color-dots').forEach(group => {
   });
 });
 
-// شروع اولیه
+/* init */
 goTo(0);

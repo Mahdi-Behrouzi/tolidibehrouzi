@@ -1,75 +1,129 @@
-const track = document.getElementById('track');
-const dots = document.querySelectorAll('.sdot');
+const track = document.getElementById("track");
+const cards = document.querySelectorAll(".product-card");
+const dots = document.querySelectorAll(".sdot");
 
-let page = 0;
-const perPage = 2;
+let index = 0;
+let isDragging = false;
+let startX = 0;
+let scrollStart = 0;
+let autoPlay;
 
-function getPages() {
-  return Math.ceil(track.children.length / perPage);
-}
-
-function goTo(p) {
-  const pages = getPages();
-
-  page = Math.max(0, Math.min(p, pages - 1));
-
-  const card = track.children[0];
-  const cardWidth = card.offsetWidth + 12;
-
-  const moveX = page * cardWidth * perPage;
-
-  track.style.transform = `translateX(-${moveX}px)`;
+/* ---------- ACTIVE STATE ---------- */
+function setActive() {
+  cards.forEach((c, i) => {
+    c.classList.toggle("active", i === index);
+  });
 
   dots.forEach((d, i) => {
-    d.classList.toggle('active', i === page);
+    d.classList.toggle("active", i === index);
   });
 }
 
-/* touch swipe */
-let startX = 0;
+/* ---------- MOVE ---------- */
+function goTo(i) {
+  const max = cards.length - 1;
 
-track.addEventListener('touchstart', e => {
-  startX = e.touches[0].clientX;
-});
+  index = Math.max(0, Math.min(i, max));
 
-track.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - startX;
+  const card = cards[0];
+  const gap = 12;
 
-  if (Math.abs(dx) > 40) {
-    goTo(page + (dx < 0 ? 1 : -1));
-  }
-});
+  const move = (card.offsetWidth + gap) * index;
 
-/* mouse drag */
-let mx = 0;
+  track.scrollTo({
+    left: move,
+    behavior: "smooth"
+  });
 
-track.addEventListener('mousedown', e => {
-  mx = e.clientX;
-});
-
-track.addEventListener('mouseup', e => {
-  const dx = e.clientX - mx;
-
-  if (Math.abs(dx) > 40) {
-    goTo(page + (dx < 0 ? 1 : -1));
-  }
-});
-
-/* wishlist */
-function toggleWish(btn) {
-  btn.classList.toggle('active');
-  btn.textContent = btn.classList.contains('active') ? '♥' : '♡';
+  setActive();
 }
 
-/* color dots */
-document.querySelectorAll('.color-dots').forEach(group => {
-  group.querySelectorAll('.dot').forEach(dot => {
-    dot.addEventListener('click', () => {
-      group.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-      dot.classList.add('active');
+/* ---------- REAL DRAG (SUPER SMOOTH) ---------- */
+track.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  startX = e.pageX;
+  scrollStart = track.scrollLeft;
+  stopAuto();
+});
+
+track.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+
+  const x = e.pageX;
+  const walk = (startX - x) * 1.5;
+
+  track.scrollLeft = scrollStart + walk;
+});
+
+track.addEventListener("mouseup", () => {
+  isDragging = false;
+  snapToClosest();
+  startAuto();
+});
+
+track.addEventListener("mouseleave", () => {
+  isDragging = false;
+});
+
+/* ---------- TOUCH ---------- */
+let touchStart = 0;
+
+track.addEventListener("touchstart", (e) => {
+  touchStart = e.touches[0].clientX;
+  stopAuto();
+});
+
+track.addEventListener("touchmove", (e) => {
+  const diff = touchStart - e.touches[0].clientX;
+  track.scrollLeft += diff;
+  touchStart = e.touches[0].clientX;
+});
+
+track.addEventListener("touchend", () => {
+  snapToClosest();
+  startAuto();
+});
+
+/* ---------- SNAP ENGINE ---------- */
+function snapToClosest() {
+  const cardWidth = cards[0].offsetWidth + 12;
+
+  const newIndex = Math.round(track.scrollLeft / cardWidth);
+
+  goTo(newIndex);
+}
+
+/* ---------- AUTOPLAY ---------- */
+function startAuto() {
+  autoPlay = setInterval(() => {
+    index++;
+
+    if (index >= cards.length) index = 0;
+
+    goTo(index);
+  }, 3000);
+}
+
+function stopAuto() {
+  clearInterval(autoPlay);
+}
+
+/* ---------- WISHLIST ---------- */
+function toggleWish(btn) {
+  btn.classList.toggle("active");
+  btn.textContent = btn.classList.contains("active") ? "♥" : "♡";
+}
+
+/* ---------- COLOR DOTS ---------- */
+document.querySelectorAll(".color-dots").forEach(group => {
+  group.querySelectorAll(".dot").forEach(dot => {
+    dot.addEventListener("click", () => {
+      group.querySelectorAll(".dot").forEach(d => d.classList.remove("active"));
+      dot.classList.add("active");
     });
   });
 });
 
-/* init */
-goTo(0);
+/* ---------- INIT ---------- */
+setActive();
+startAuto();

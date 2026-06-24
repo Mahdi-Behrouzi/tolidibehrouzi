@@ -43,7 +43,8 @@ body {
   gap: 12px;
   transition: transform 0.4s ease;
   will-change: transform;
-  direction: rtl;
+
+  direction: ltr; /* مهم: اینو عوض کن */
 }
 
 /* card */

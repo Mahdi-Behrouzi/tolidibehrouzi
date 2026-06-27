@@ -681,7 +681,7 @@ button { cursor: pointer; border: none; background: none; }
 .products-slider::-webkit-scrollbar { display: none; }
 
 .product-card {
-  min-width: 240px;
+  min-width: 160px;
   background: var(--white);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -693,7 +693,7 @@ button { cursor: pointer; border: none; background: none; }
 
 .product-img-wrap {
   position: relative;
-  aspect-ratio: 4/5;
+  aspect-ratio: 3/4;
   overflow: hidden;
   background: #f0ede8;
 }

@@ -654,176 +654,6 @@ button { cursor: pointer; border: none; background: none; }
 
 .wishlist-toggle {
   position: absolut
-   /* ===== BESTSELLERS ===== */
-
-.bestsellers-section{
-    position:relative;
-    padding:60px 0;
-    overflow:hidden;
-}
-
-.bestsellers-bg{
-    position:absolute;
-    inset:0;
-    background:var(--dark);
-    z-index:0;
-}
-
-.section-inner{
-    position:relative;
-    z-index:1;
-    width:100%;
-    max-width:1200px;
-    margin:auto;
-    padding:0 20px;
-}
-
-/* اسلایدر */
-
-.products-slider{
-    display:flex;
-    gap:18px;
-    overflow-x:auto;
-    padding:15px 5px 20px;
-    scroll-snap-type:x mandatory;
-    scrollbar-width:none;
-    -webkit-overflow-scrolling:touch;
-}
-
-.products-slider::-webkit-scrollbar{
-    display:none;
-}
-
-/* کارت */
-
-.product-card{
-
-    min-width:180px;
-    max-width:180px;
-
-    background:#fff;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    flex-shrink:0;
-
-    scroll-snap-align:start;
-
-    transition:.35s;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-
-}
-
-.product-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
-
-}
-
-/* عکس */
-
-.product-img-wrap{
-
-    height:190px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#f7f7f7;
-
-    overflow:hidden;
-
-}
-
-.product-img-wrap img{
-
-    width:78%;
-
-    height:78%;
-
-    object-fit:contain;
-
-    transition:.4s;
-
-}
-
-.product-card:hover .product-img-wrap img{
-
-    transform:scale(1.08);
-
-}
-
-/* اطلاعات محصول */
-
-.product-info{
-
-    padding:14px;
-
-    text-align:center;
-
-}
-
-.product-title{
-
-    font-size:15px;
-
-    font-weight:700;
-
-    color:#222;
-
-    margin-bottom:8px;
-
-    line-height:1.5;
-
-}
-
-.product-price{
-
-    color:#b91c1c;
-
-    font-size:16px;
-
-    font-weight:800;
-
-}
-
-/* موبایل */
-
-@media(max-width:768px){
-
-.product-card{
-
-    min-width:145px;
-
-    max-width:145px;
-
-}
-
-.product-img-wrap{
-
-    height:145px;
-
-}
-
-.product-title{
-
-    font-size:13px;
-
-}
-
-.product-price{
-
-    font-size:14px;
-
-}
 
    }e; top: 0.75rem; left: 0.75rem;
   width: 34px; height: 34px;
@@ -842,7 +672,74 @@ button { cursor: pointer; border: none; background: none; }
 .product-badge {
   position: absolute; top: 0.75rem; right: 0.75rem;
   padding: 0.25rem 0.6rem;
-  font-size: 0.65rem;
+  font-size: 0/* ===== BESTSELLERS ===== */
+.bestsellers-section {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.bestsellers-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--dark);
+  z-index: 0;
+}
+
+.section-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 360px;      /* قبلاً 300px */
+  margin: 0 auto;
+  padding: 3rem 1rem 3.5rem;
+}
+
+.products-slider {
+  display: flex;
+  gap: 0.8rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+}
+
+.products-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.product-card {
+  min-width: 95px;       /* قبلاً 110px */
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  transition: transform 0.3s var(--ease);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+.product-img-wrap {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: #f0ede8;
+}
+
+.product-img-wrap img {
+  width: 72%;            /* قبلاً 80% */
+  height: 72%;           /* قبلاً 80% */
+  object-fit: cover;
+  display: block;
+  margin: auto;
+  transition: transform 0.6s var(--ease);
+}
+
+.product-card:hover .product-img-wrap img {
+  transform: scale(1.06);
+}.65rem;
   font-weight: 700;
   border-radius: 100px;
   letter-spacing: 0.05em;

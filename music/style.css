@@ -1,0 +1,293 @@
+/* متغیرهای رنگی و تنظیمات پایه */
+:root {
+    --bg-main: #0a0a0a;
+    --bg-secondary: #171717;
+    --bg-glass: rgba(23, 23, 23, 0.7);
+    --text-primary: #f5f5f5;
+    --text-secondary: #a3a3a3;
+    --accent: #4f46e5;
+    --accent-hover: #4338ca;
+    --border-color: #262626;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+/* نوار پیشرفت مطالعه */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--accent);
+    transform-origin: right;
+    transform: scaleX(0);
+    z-index: 100;
+    transition: transform 0.1s ease-out;
+}
+
+/* ساختار مقاله */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    display: flex;
+    position: relative;
+}
+
+.article-content {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    animation: fadeIn 1s ease-out;
+}
+
+header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2rem;
+    margin-bottom: 3rem;
+}
+
+.meta {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 2rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    color: #d4d4d4;
+    font-size: 1.1rem;
+}
+
+.spacer-text {
+    height: 1000px;
+    border-left: 2px dashed var(--border-color);
+    padding-left: 1rem;
+    color: #737373;
+}
+
+/* دکمه شناور */
+.ai-fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: var(--bg-main);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    z-index: 40;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+}
+
+.ai-fab:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.ai-fab.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+}
+
+/* سایدبار هوش مصنوعی */
+.ai-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    background-color: var(--bg-secondary);
+    border-left: 1px solid var(--border-color);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.ai-sidebar.open {
+    right: 0;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-glass);
+    backdrop-filter: blur(10px);
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10b981;
+    border-radius: 50%;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.close-btn:hover {
+    background: var(--border-color);
+    color: white;
+}
+
+/* بخش پیام‌ها */
+.chat-area {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.message {
+    max-width: 85%;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: 0.95rem;
+    animation: slideUp 0.3s ease-out;
+}
+
+.message.ai {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+    align-self: flex-start;
+    border-bottom-right-radius: 0;
+}
+
+.message.user {
+    background-color: var(--accent);
+    color: white;
+    align-self: flex-end;
+    border-bottom-left-radius: 0;
+}
+
+/* ورودی متن چت */
+.input-area {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-glass);
+    backdrop-filter: blur(10px);
+}
+
+.chat-form {
+    display: flex;
+    position: relative;
+}
+
+.chat-input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3.5rem;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    color: white;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.chat-input:focus {
+    border-color: var(--accent);
+}
+
+.send-btn {
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.send-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+/* پس‌زمینه تاریک‌کننده برای موبایل */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 45;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* انیمیشن‌های کلیدی */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

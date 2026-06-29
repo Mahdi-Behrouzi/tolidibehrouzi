@@ -287,7 +287,7 @@ button { cursor: pointer; border: none; background: none; }
   width: 100%;
   height: calc(100vh - var(--nav-h) - 36px);
   min-height: 500px;
-  max-height: 800px;
+  max-height: 700px;
   overflow: hidden;
   background: var(--black);
 }

@@ -1,0 +1,40 @@
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+
+// ۱. تعریف دقیق نوع داده‌ها برای جلوگیری از خطا (ظرافت منطقی)
+interface ArticleCardProps {
+  title: string;
+  excerpt: string;
+  slug: string;
+  date: string;
+}
+
+export default function ArticleCard({ title, excerpt, slug, date }: ArticleCardProps) {
+  return (
+    // ۲. استفاده از انیمیشن‌های نرم و فیزیک‌محور برای تعامل کاربر (ظرافت بصری)
+    <motion.div
+      whileHover={{ y: -6 }} // حرکت بسیار نرم و نامحسوس به سمت بالا
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      className="group relative bg-white/60 backdrop-blur-lg border border-gray-100 rounded-2xl p-6 transition-shadow duration-300 hover:shadow-2xl hover:shadow-gray-200/50"
+    >
+      {/* تاریخ مقاله با طراحی مینیمال */}
+      <time className="text-xs font-medium text-gray-400 tracking-widest mb-4 block uppercase">
+        {date}
+      </time>
+      
+      {/* تیتر مقاله با افکت تغییر رنگ هنگام هاور */}
+      <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+        <Link href={/blog/${slug}}>
+          {/* این تگ باعث می‌شود کل کارت قابل کلیک باشد، بدون به هم ریختن ساختار HTML */}
+          <span className="absolute inset-0" aria-hidden="true" />
+          {title}
+        </Link>
+      </h3>
+      
+      {/* خلاصه مقاله با محدودیت هوشمندانه خطوط (Line Clamp) */}
+      <p className="text-sm text-gray-500 leading-loose line-clamp-3">
+        {excerpt}
+      </p>
+    </motion.div>
+  );
+}

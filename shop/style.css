@@ -1153,3 +1153,22 @@ button { cursor: pointer; border: none; background: none; }
   .product-card { min-width: 300px; }
   .promo-text { padding: 3.5rem 2.5rem; }
 }
+
+trace:: before {
+
+background: conic-gradient(
+
+from var(--ang),
+
+transparent,
+
+blue, cyan,
+
+transparent);
+
+animation:
+
+rotate 3s
+
+linear infinite؛
+}

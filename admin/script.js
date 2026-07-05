@@ -41,20 +41,6 @@
     if(!res.ok) throw new Error("bad status " + res.status);
   }
 
-  // رمز مدیر هم داخل همان bin (فیلد adminConfig) نگه داشته می‌شود تا از هر مرورگر/دستگاهی قابل ورود باشد
-  async function loadConfig(){
-    try{ const record = await fetchRecord(); return record.adminConfig || null; }
-    catch(e){ console.error("loadConfig failed", e); return null; }
-  }
-  async function saveConfig(cfg){
-    try{
-      const record = await fetchRecord();
-      record.adminConfig = cfg;
-      await putRecord(record);
-      return true;
-    }catch(e){ console.error("saveConfig failed", e); return false; }
-  }
-
   // آمار بازدید فقط محلی است (روی همین مرورگر) و نیازی به سرور ندارد
   function loadStats(){
     try{ return JSON.parse(localStorage.getItem("didebaan_stats")) || { visits:0 }; }
@@ -107,51 +93,28 @@
   }
 
   // ---------- GATE LOGIC ----------
+  // رمز ورود ثابت و از پیش تعیین‌شده — برای تغییرش همین مقدار را عوض کن
+  const ADMIN_PASSWORD = "Didebaan@2026";
+
   const setupForm = document.getElementById("setupForm");
   const loginForm = document.getElementById("loginForm");
   const gate = document.getElementById("gate");
   const app = document.getElementById("app");
 
-  async function initGate(){
-    const cfg = await loadConfig();
-    if(cfg && cfg.hash && cfg.salt){
-      setupForm.classList.add("hidden");
-      loginForm.classList.remove("hidden");
-    } else {
-      setupForm.classList.remove("hidden");
-      loginForm.classList.add("hidden");
-    }
+  function initGate(){
+    setupForm.classList.add("hidden");
+    loginForm.classList.remove("hidden");
   }
 
-  document.getElementById("setupBtn").addEventListener("click", async () => {
-    const p1 = document.getElementById("setupPass1").value;
-    const p2 = document.getElementById("setupPass2").value;
-    const msg = document.getElementById("setupMsg");
-    msg.className = "gate-msg";
-    if(p1.length < 6){ msg.textContent = "رمز باید حداقل ۶ کاراکتر باشد."; msg.classList.add("err"); return; }
-    if(p1 !== p2){ msg.textContent = "دو رمز با هم یکسان نیستند."; msg.classList.add("err"); return; }
-    const salt = randHex(16);
-    const hash = await sha256(salt + p1);
-    const ok = await saveConfig({ salt, hash, createdAt: Date.now() });
-    if(!ok){ msg.textContent = "خطا در ذخیره‌سازی، دوباره تلاش کنید."; msg.classList.add("err"); return; }
-    msg.textContent = "رمز با موفقیت ساخته شد. در حال ورود...";
-    msg.classList.add("ok");
-    sessionToken = randHex(12);
-    setTimeout(enterApp, 500);
-  });
-
-  document.getElementById("loginBtn").addEventListener("click", async () => {
+  document.getElementById("loginBtn").addEventListener("click", () => {
     const pass = document.getElementById("loginPass").value;
     const msg = document.getElementById("loginMsg");
     msg.className = "gate-msg";
-    const cfg = await loadConfig();
-    if(!cfg){ msg.textContent = "خطا در بارگیری تنظیمات."; msg.classList.add("err"); return; }
-    const hash = await sha256(cfg.salt + pass);
-    if(hash === cfg.hash){
+    if(pass === ADMIN_PASSWORD){
       sessionToken = randHex(12);
       msg.textContent = "رمز درست است. در حال ورود...";
       msg.classList.add("ok");
-      setTimeout(enterApp, 350);
+      setTimeout(enterApp, 300);
     } else {
       msg.textContent = "رمز عبور اشتباه است.";
       msg.classList.add("err");

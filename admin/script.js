@@ -94,7 +94,7 @@
 
   // ---------- GATE LOGIC ----------
   // رمز ورود ثابت و از پیش تعیین‌شده — برای تغییرش همین مقدار را عوض کن
-  const ADMIN_PASSWORD = "Didebaan@2026";
+  const ADMIN_PASSWORD = "Behrouzi1384";
 
   const setupForm = document.getElementById("setupForm");
   const loginForm = document.getElementById("loginForm");

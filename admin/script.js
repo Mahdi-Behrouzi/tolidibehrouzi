@@ -9,15 +9,6 @@
   };
   const initials = name => (name||"?").trim().slice(0,2);
 
-  async function storeGet(key){
-    try{ const r = await window.storage.get(key, true); return r ? JSON.parse(r.value) : null; }
-    catch(e){ return null; }
-  }
-  async function storeSet(key, val){
-    try{ await window.storage.set(key, JSON.stringify(val), true); return true; }
-    catch(e){ console.error("storage set failed", e); return false; }
-  }
-
   async function sha256(text){
     const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
     return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
@@ -34,17 +25,51 @@
   const JSONBIN_URL = "https://api.jsonbin.io/v3/b/6a48fe01da38895dfe2d06dd";
   const JSONBIN_KEY  = "$2a$10$KHZy8R1Fpm5H8eDgoB9uaOXIHP0BowiquBPfSI7JcGJwmMaFxZhja";
 
-  async function loadConfig(){ return await storeGet("admin_config"); }
-  async function loadStats(){ return (await storeGet("stats_data")) || { visits:0 }; }
-  async function saveStats(s){ return await storeSet("stats_data", s); }
+  // خواندن/نوشتن کل رکورد bin (شامل هم نظرات و هم تنظیمات مدیر)
+  async function fetchRecord(){
+    const res = await fetch(JSONBIN_URL + "/latest", { headers: { "X-Master-Key": JSONBIN_KEY } });
+    if(!res.ok) throw new Error("bad status " + res.status);
+    const data = await res.json();
+    return data.record || {};
+  }
+  async function putRecord(record){
+    const res = await fetch(JSONBIN_URL, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json", "X-Master-Key": JSONBIN_KEY },
+      body: JSON.stringify(record)
+    });
+    if(!res.ok) throw new Error("bad status " + res.status);
+  }
+
+  // رمز مدیر هم داخل همان bin (فیلد adminConfig) نگه داشته می‌شود تا از هر مرورگر/دستگاهی قابل ورود باشد
+  async function loadConfig(){
+    try{ const record = await fetchRecord(); return record.adminConfig || null; }
+    catch(e){ console.error("loadConfig failed", e); return null; }
+  }
+  async function saveConfig(cfg){
+    try{
+      const record = await fetchRecord();
+      record.adminConfig = cfg;
+      await putRecord(record);
+      return true;
+    }catch(e){ console.error("saveConfig failed", e); return false; }
+  }
+
+  // آمار بازدید فقط محلی است (روی همین مرورگر) و نیازی به سرور ندارد
+  function loadStats(){
+    try{ return JSON.parse(localStorage.getItem("didebaan_stats")) || { visits:0 }; }
+    catch(e){ return { visits:0 }; }
+  }
+  function saveStats(s){
+    try{ localStorage.setItem("didebaan_stats", JSON.stringify(s)); return true; }
+    catch(e){ return false; }
+  }
 
   // خواندن نظرات از jsonbin.io — بازگشت null یعنی خطای اتصال
   async function loadComments(){
     try{
-      const res = await fetch(JSONBIN_URL + "/latest", { headers: { "X-Master-Key": JSONBIN_KEY } });
-      if(!res.ok) throw new Error("bad status " + res.status);
-      const data = await res.json();
-      const raw = (data.record && data.record.comments) || [];
+      const record = await fetchRecord();
+      const raw = record.comments || [];
       return raw.map((c, idx) => ({
         idx,
         name: c.name || "ناشناس",
@@ -60,7 +85,7 @@
     }
   }
 
-  // نوشتن کل آرایه‌ی نظرات روی jsonbin.io (بازنویسی کامل bin)
+  // نوشتن آرایه‌ی نظرات روی jsonbin.io بدون پاک‌کردن تنظیمات مدیر (adminConfig)
   async function saveComments(list){
     const raw = list.map(c => ({
       name: c.name,
@@ -71,12 +96,9 @@
       createdAt: c.createdAt ? new Date(c.createdAt).toISOString() : new Date().toISOString()
     }));
     try{
-      const res = await fetch(JSONBIN_URL, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json", "X-Master-Key": JSONBIN_KEY },
-        body: JSON.stringify({ comments: raw })
-      });
-      if(!res.ok) throw new Error("bad status " + res.status);
+      const record = await fetchRecord();
+      record.comments = raw;
+      await putRecord(record);
       return true;
     }catch(e){
       console.error("jsonbin save failed", e);
@@ -110,7 +132,7 @@
     if(p1 !== p2){ msg.textContent = "دو رمز با هم یکسان نیستند."; msg.classList.add("err"); return; }
     const salt = randHex(16);
     const hash = await sha256(salt + p1);
-    const ok = await storeSet("admin_config", { salt, hash, createdAt: Date.now() });
+    const ok = await saveConfig({ salt, hash, createdAt: Date.now() });
     if(!ok){ msg.textContent = "خطا در ذخیره‌سازی، دوباره تلاش کنید."; msg.classList.add("err"); return; }
     msg.textContent = "رمز با موفقیت ساخته شد. در حال ورود...";
     msg.classList.add("ok");

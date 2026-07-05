@@ -3,632 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZIZI | پوشاک لوکس</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <title>نظرات مشتریان | ZIZI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ===== ANNOUNCEMENT BAR ===== -->
-<div class="announce-bar">
-  <div class="announce-inner">
-    <span>🎁 ارسال رایگان برای خرید بالای ۵۰۰ هزار تومان</span>
-    <span class="sep">|</span>
-    <span>✨ کالکشن بهار ۱۴۰۳ — موجودی محدود</span>
-    <span class="sep">|</span>
-    <span>📞 پشتیبانی ۹ تا ۲۱ هر روز</span>
-  </div>
-</div>
-
-<!-- ===== NAVBAR ===== -->
-<header class="navbar" id="navbar">
-  <div class="nav-container">
-
-    <!-- Mobile: hamburger -->
-    <button class="hamburger" id="hamburger" aria-label="منو">
-      <span></span><span></span><span></span>
-    </button>
-
-    <!-- Desktop nav links (right side) -->
-    <nav class="nav-links-right">
-      <a href="#">صفحه اصلی</a>
-      <a href="#">محصولات</a>
-      <a href="#">کالکشن‌ها</a>
-    </nav>
-
-    <!-- Logo -->
-    <a href="#" class="logo">
-      <span class="logo-main">ZIZI</span>
-      <span class="logo-sub">CHARISMA</span>
+  <!-- HEADER -->
+  <header class="c-header">
+    <a href="index.html" class="c-back">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"/></svg>
+      بازگشت
     </a>
+    <span class="c-logo">ZIZI</span>
+    <span></span>
+  </header>
 
-    <!-- Desktop nav links (left side) -->
-    <nav class="nav-links-left">
-      <a href="#">مجله</a>
-      <a href="#">درباره ما</a>
-      <a href="#">تماس</a>
-    </nav>
-
-    <!-- Icons -->
-    <div class="nav-icons">
-      <button class="icon-btn" aria-label="جستجو" id="searchToggle">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </button>
-      <button class="icon-btn wishlist-btn" aria-label="علاقه‌مندی‌ها">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </button>
-      <button class="icon-btn cart-btn" aria-label="سبد خرید">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <span class="cart-badge">3</span>
-      </button>
-    </div>
-
-  </div>
-
-  <!-- Search bar -->
-  <div class="search-bar" id="searchBar">
-    <div class="search-inner">
-      <input type="text" placeholder="جستجو در محصولات..." class="search-input">
-      <button class="search-close" id="searchClose">✕</button>
+  <!-- HERO -->
+  <div class="c-hero">
+    <span class="c-hero-tag">نظر مشتریان</span>
+    <h1 class="c-hero-title">تجربه خریدت رو با ما در میان بذار</h1>
+    <p class="c-hero-desc">بعد از ثبت، نظر برای بررسی ارسال می‌شود — نظر مشتریان پایین فرم نمایش داده شده است</p>
+    <div class="c-hero-stats">
+      <div class="c-stat"><strong id="totalCount">—</strong><span>نظر ثبت‌شده</span></div>
+      <div class="c-stat-sep"></div>
+      <div class="c-stat"><strong id="avgRating">—</strong><span>میانگین امتیاز</span></div>
+      <div class="c-stat-sep"></div>
+      <div class="c-stat"><strong>۹۸٪</strong><span>رضایت مشتریان</span></div>
     </div>
   </div>
-</header>
 
-<!-- Mobile Sidebar Menu -->
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-head">
-    <span class="logo-main" style="color:#C9A84C;font-size:1.4rem">ZIZI</span>
-    <button class="sidebar-close" id="sidebarClose">✕</button>
-  </div>
-  <nav class="sidebar-nav">
-    <a href="#"><span>✨</span> کالکشن جدید</a>
-    <a href="#"><span>👔</span> پوشاک مردانه</a>
-    <a href="#"><span>👗</span> پوشاک زنانه</a>
-    <a href="#"><span>👑</span> اکسسوری</a>
-    <a href="#"><span>📖</span> مجله</a>
-    <a href="#"><span>📞</span> پشتیبانی</a>
-  </nav>
-  <div class="sidebar-footer">
-    <p>پشتیبانی ۹ تا ۲۱</p>
-    <strong>021-XXXX-XXXX</strong>
-  </div>
-</aside>
+  <main class="c-main">
 
-<!-- ===== HERO SLIDER ===== -->
-<section class="hero" id="hero">
-  <div class="hero-track" id="heroTrack">
+    <!-- FORM -->
+    <section class="c-form-wrap">
+      <form id="commentForm" class="c-form" novalidate>
 
-    <div class="hero-slide">
-      <div class="hero-bg">
-        <img src="../img/عکس نوشته ساز_1663151402523.png" alt="slide 1" class="hero-img">
-        <div class="hero-gradient"></div>
-      </div>
-      <div class="hero-content">
-        <div class="hero-text-wrap">
-          <span class="hero-tag">کالکشن بهار ۱۴۰۳</span>
-          <h1 class="hero-title">استایلی که<br>حرف می‌زند</h1>
-          <p class="hero-desc">پوشاک با طراحی اختصاصی برای شخصیت منحصربه‌فرد شما</p>
-          <div class="hero-btns">
-            <a href="#" class="btn-gold">مشاهده کالکشن</a>
-            <a href="#" class="btn-outline-white">راهنمای سایز</a>
+        <div class="c-form-row">
+          <div class="c-field">
+            <label for="name">نام</label>
+            <input type="text" id="name" placeholder="مثلاً: علی رضایی" autocomplete="name">
+          </div>
+          <div class="c-field">
+            <label for="contact">ایمیل یا شماره تلفن</label>
+            <input type="text" id="contact" placeholder="ایمیل یا موبایل" autocomplete="email">
           </div>
         </div>
-        <div class="hero-badge-wrap">
-          <div class="hero-badge">
-            <span class="badge-num">۱۴۰۳</span>
-            <span class="badge-label">کالکشن جدید</span>
+
+        <div class="c-field">
+          <label>امتیاز شما</label>
+          <div class="c-stars">
+            <input type="radio" name="rating" id="s5" value="5"><label for="s5">★</label>
+            <input type="radio" name="rating" id="s4" value="4"><label for="s4">★</label>
+            <input type="radio" name="rating" id="s3" value="3"><label for="s3">★</label>
+            <input type="radio" name="rating" id="s2" value="2"><label for="s2">★</label>
+            <input type="radio" name="rating" id="s1" value="1"><label for="s1">★</label>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="hero-slide">
-      <div class="hero-bg">
-        <img src="../img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۴۵۳.jpg" alt="slide 2" class="hero-img">
-        <div class="hero-gradient"></div>
-      </div>
-      <div class="hero-content">
-        <div class="hero-text-wrap">
-          <span class="hero-tag">ترند بهار</span>
-          <h1 class="hero-title">زیبایی در<br>سادگی</h1>
-          <p class="hero-desc">از بهترین برندهای روز با ارسال سریع به سراسر ایران</p>
-          <div class="hero-btns">
-            <a href="#" class="btn-gold">خرید کنید</a>
-            <a href="#" class="btn-outline-white">بیشتر بدانید</a>
-          </div>
+        <div class="c-field">
+          <label for="message">نظر شما</label>
+          <textarea id="message" placeholder="تجربه‌ی خود را با دیگران به اشتراک بگذارید..."></textarea>
         </div>
-        <div class="hero-badge-wrap">
-          <div class="hero-badge">
-            <span class="badge-num">-۴۰٪</span>
-            <span class="badge-label">تخفیف ویژه</span>
-          </div>
+
+        <div class="c-error" id="formError"></div>
+
+        <button type="submit" class="c-submit" id="submitBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          ارسال نظر
+        </button>
+
+        <div class="c-success" id="commentSuccess">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          نظر شما ثبت شد و پس از تأیید نمایش داده می‌شود.
         </div>
-      </div>
-    </div>
 
-    <div class="hero-slide">
-      <div class="hero-bg">
-        <img src="../img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۲۱۴.jpg" alt="slide 3" class="hero-img">
-        <div class="hero-gradient"></div>
-      </div>
-      <div class="hero-content">
-        <div class="hero-text-wrap">
-          <span class="hero-tag">اکسکلوسیو</span>
-          <h1 class="hero-title">محدود،<br>خاص، شما</h1>
-          <p class="hero-desc">آیتم‌های ادیشن محدود — فقط برای کسانی که اول می‌رسند</p>
-          <div class="hero-btns">
-            <a href="#" class="btn-gold">موجودی محدود</a>
-            <a href="#" class="btn-outline-white">مشاهده همه</a>
-          </div>
-        </div>
-        <div class="hero-badge-wrap">
-          <div class="hero-badge">
-            <span class="badge-num">VIP</span>
-            <span class="badge-label">ادیشن محدود</span>
-          </div>
-        </div>
-      </div>
-    </div>
+      </form>
+    </section>
 
-    <div class="hero-slide">
-      <div class="hero-bg">
-        <img src="../img/IMG_20240302_195417.jpg" alt="slide 4" class="hero-img">
-        <div class="hero-gradient"></div>
+    <!-- COMMENTS SLIDER -->
+    <section class="c-comments-section">
+      <div class="c-comments-head">
+        <h2 class="c-comments-title">آخرین نظرات</h2>
+        <span class="c-comments-badge" id="approvedCount">...</span>
       </div>
-      <div class="hero-content">
-        <div class="hero-text-wrap">
-          <span class="hero-tag">پیشنهاد شگفت‌انگیز</span>
-          <h1 class="hero-title">تا ۵۰٪<br>تخفیف</h1>
-          <p class="hero-desc">ارسال رایگان + ۷ روز ضمانت بازگشت بدون قید و شرط</p>
-          <div class="hero-btns">
-            <a href="#" class="btn-gold">استفاده از تخفیف</a>
-            <a href="#" class="btn-outline-white">شرایط و ضوابط</a>
-          </div>
-        </div>
-        <div class="hero-badge-wrap">
-          <div class="hero-badge">
-            <span class="badge-num">-۵۰٪</span>
-            <span class="badge-label">آخرین شانس</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
-  </div><!-- /hero-track -->
+      <div class="c-skeleton-wrap" id="skeletonWrap">
+        <div class="c-skel-card"><div class="skel w60"></div><div class="skel w40 mt8"></div><div class="skel w100 mt16"></div><div class="skel w80 mt8"></div></div>
+        <div class="c-skel-card"><div class="skel w60"></div><div class="skel w40 mt8"></div><div class="skel w100 mt16"></div><div class="skel w80 mt8"></div></div>
+        <div class="c-skel-card"><div class="skel w60"></div><div class="skel w40 mt8"></div><div class="skel w100 mt16"></div><div class="skel w80 mt8"></div></div>
+      </div>
 
-  <!-- Controls -->
-  <button class="hero-arrow hero-prev" id="heroPrev" aria-label="قبلی">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-  </button>
-  <button class="hero-arrow hero-next" id="heroNext" aria-label="بعدی">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>
-
-  <div class="hero-dots" id="heroDots">
-    <button class="hero-dot active" data-i="0"></button>
-    <button class="hero-dot" data-i="1"></button>
-    <button class="hero-dot" data-i="2"></button>
-    <button class="hero-dot" data-i="3"></button>
-  </div>
-
-  <div class="hero-counter">
-    <span id="heroNum" class="hero-num">01</span>
-    <span class="hero-slash">/</span>
-    <span class="hero-total">04</span>
-  </div>
-
-  <!-- Thumbnail strip (desktop only) -->
-  <div class="hero-thumbs" id="heroThumbs">
-    <div class="hero-thumb active" data-i="0"><img src="../img/عکس نوشته ساز_1663151402523.png" alt=""></div>
-    <div class="hero-thumb" data-i="1"><img src="../img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۴۵۳.jpg" alt=""></div>
-    <div class="hero-thumb" data-i="2"><img src="../img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۲۱۴.jpg" alt=""></div>
-    <div class="hero-thumb" data-i="3"><img src="../img/IMG_20240302_195417.jpg" alt=""></div>
-  </div>
-
-  <!-- Progress bar -->
-  <div class="hero-progress"><div class="hero-progress-fill" id="heroProgress"></div></div>
-</section>
-
-<!-- ===== FEATURES BAR ===== -->
-<section class="features-bar">
-  <div class="features-scroll">
-    <div class="feature">
-      <div class="feature-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <div>
-        <strong>ضمانت اصالت</strong>
-        <span>۱۰۰٪ اورجینال</span>
-      </div>
-    </div>
-    <div class="feature-sep"></div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-      </div>
-      <div>
-        <strong>ارسال سریع</strong>
-        <span>رایگان از ۵۰۰ هزار</span>
-      </div>
-    </div>
-    <div class="feature-sep"></div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-      </div>
-      <div>
-        <strong>۷ روز بازگشت</strong>
-        <span>بدون قید و شرط</span>
-      </div>
-    </div>
-    <div class="feature-sep"></div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      </div>
-      <div>
-        <strong>پرداخت امن</strong>
-        <span>درگاه بانکی معتبر</span>
-      </div>
-    </div>
-    <div class="feature-sep"></div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.18 4.12h3A2 2 0 015 5.84c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L4.09 11.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-      </div>
-      <div>
-        <strong>پشتیبانی ۲۴/۷</strong>
-        <span>همیشه در دسترس</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== CATEGORY PILLS (Mobile) ===== -->
-<section class="cat-pills-section">
-  <div class="cat-pills-wrap">
-    <button class="cat-pill active">همه</button>
-    <button class="cat-pill">زنانه</button>
-    <button class="cat-pill">مردانه</button>
-    <button class="cat-pill">اسپرت</button>
-    <button class="cat-pill">اکسسوری</button>
-    <button class="cat-pill">کالکشن ویژه</button>
-  </div>
-</section>
-
-<!-- ===== CATEGORIES GRID ===== -->
-<section class="section categories-section">
-  <div class="section-head">
-    <div>
-      <span class="section-tag">دسته‌بندی‌ها</span>
-      <h2 class="section-title">آنچه می‌خواهید را پیدا کنید</h2>
-    </div>
-    <a href="#" class="see-all">مشاهده همه <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></a>
-  </div>
-
-  <div class="cat-grid">
-    <div class="cat-card cat-large">
-      <div class="cat-img-box">
-        <img src="../img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۴۵۳.jpg" alt="زنانه">
-      </div>
-      <div class="cat-overlay">
-        <span class="cat-name">زنانه</span>
-        <span class="cat-count">+۱۲۰ محصول</span>
-        <a href="#" class="cat-link">مشاهده <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></a>
-      </div>
-    </div>
-    <div class="cat-card">
-      <div class="cat-img-box">
-        <img src="../img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۲۱۴.jpg" alt="مردانه">
-      </div>
-      <div class="cat-overlay">
-        <span class="cat-name">مردانه</span>
-        <span class="cat-count">+۸۰ محصول</span>
-        <a href="#" class="cat-link">مشاهده <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></a>
-      </div>
-    </div>
-    <div class="cat-card">
-      <div class="cat-img-box">
-        <img src="../img/IMG_20240302_195417.jpg" alt="اکسسوری">
-      </div>
-      <div class="cat-overlay">
-        <span class="cat-name">اکسسوری</span>
-        <span class="cat-count">+۵۰ محصول</span>
-        <a href="#" class="cat-link">مشاهده <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></a>
-      </div>
-    </div>
-    <div class="cat-card cat-wide">
-      <div class="cat-img-box">
-        <img src="../img/عکس نوشته ساز_1663151402523.png" alt="کالکشن ویژه">
-      </div>
-      <div class="cat-overlay">
-        <span class="cat-name">کالکشن ویژه ۱۴۰۳</span>
-        <span class="cat-count">ادیشن محدود</span>
-        <a href="#" class="cat-link">مشاهده <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== BEST SELLERS ===== -->
-<section class="section bestsellers-section">
-  <div class="bestsellers-bg"></div>
-  <div class="section-inner">
-    <div class="section-head light">
-      <div>
-        <span class="section-tag gold">پرفروش‌ترین‌ها</span>
-        <h2 class="section-title white">محبوب‌ترین محصولات</h2>
-      </div>
-      <a href="#" class="see-all light">مشاهده همه <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></a>
-    </div>
-
-    <div class="products-slider" id="productsSlider">
-
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="../img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۴۵۳.jpg" alt="محصول ۱">
-          <button class="wishlist-toggle" aria-label="افزودن به علاقه‌مندی">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <div class="c-cards-outer" id="cardsOuter" style="display:none">
+        <div class="c-cards" id="approvedComments"></div>
+        <div class="c-nav">
+          <button class="c-arrow" id="cPrev" aria-label="قبلی">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
-          <div class="product-badge new">جدید</div>
-          <button class="quick-cart" aria-label="افزودن به سبد">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <div class="c-dots" id="cDots"></div>
+          <button class="c-arrow" id="cNext" aria-label="بعدی">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
         </div>
-        <div class="product-info">
-          <div class="product-colors">
-            <span class="color-swatch" style="background:#1a1a1a"></span>
-            <span class="color-swatch" style="background:#4a4a6a"></span>
-            <span class="color-swatch" style="background:#c8a96e"></span>
-          </div>
-          <h3 class="product-name">ست پیراهن و شلوار کلاسیک</h3>
-          <div class="product-price-row">
-            <span class="product-price">۹,۳۸۰,۰۰۰</span>
-            <span class="product-unit">تومان</span>
-          </div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(۱۲۴)</span>
-          </div>
-        </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="../img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۲۱۴.jpg" alt="محصول ۲">
-          <button class="wishlist-toggle" aria-label="افزودن به علاقه‌مندی">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-          <div class="product-badge sale">-۳۰٪</div>
-          <button class="quick-cart" aria-label="افزودن به سبد">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          </button>
-        </div>
-        <div class="product-info">
-          <div class="product-colors">
-            <span class="color-swatch" style="background:#2d2d2d"></span>
-            <span class="color-swatch" style="background:#8b7355"></span>
-          </div>
-          <h3 class="product-name">کت تک اسپرت لاین</h3>
-          <div class="product-price-row">
-            <span class="product-price">۶,۳۵۰,۰۰۰</span>
-            <span class="product-unit">تومان</span>
-            <span class="product-old-price">۹,۰۰۰,۰۰۰</span>
-          </div>
-          <div class="product-rating">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-count">(۸۷)</span>
-          </div>
-        </div>
+      <div class="c-empty" id="emptyState" style="display:none">
+        <span>💬</span>
+        <p>هنوز نظری ثبت نشده — اولین نفر باشید!</p>
       </div>
+    </section>
 
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="../img/IMG_20240302_195417.jpg" alt="محصول ۳">
-          <button class="wishlist-toggle" aria-label="افزودن به علاقه‌مندی">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-          <div class="product-badge vip">VIP</div>
-          <button class="quick-cart" aria-label="افزودن به سبد">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          </button>
-        </div>
-        <div class="product-info">
-          <div class="product-colors">
-            <span class="color-swatch" style="background:#c9a84c"></span>
-            <span class="color-swatch" style="background:#1a1a2e"></span>
-            <span class="color-swatch" style="background:#fff;border:1px solid #ccc"></span>
-          </div>
-          <h3 class="product-name">ست ادیشن طلایی</h3>
-          <div class="product-price-row">
-            <span class="product-price">۱۴,۸۰۰,۰۰۰</span>
-            <span class="product-unit">تومان</span>
-          </div>
-          <div class="product-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-count">(۵۳)</span>
-          </div>
-        </div>
-      </div>
+  </main>
 
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="../img/عکس نوشته ساز_1663151402523.png" alt="محصول ۴">
-          <button class="wishlist-toggle" aria-label="افزودن به علاقه‌مندی">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
-          <button class="quick-cart" aria-label="افزودن به سبد">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          </button>
-        </div>
-        <div class="product-info">
-          <div class="product-colors">
-            <span class="color-swatch" style="background:#3d1c02"></span>
-            <span class="color-swatch" style="background:#1a1a1a"></span>
-          </div>
-          <h3 class="product-name">پیراهن کلاسیک فرم</h3>
-          <div class="product-price-row">
-            <span class="product-price">۴,۲۰۰,۰۰۰</span>
-            <span class="product-unit">تومان</span>
-          </div>
-          <div class="product-rating">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-count">(۲۰۱)</span>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /products-slider -->
-  </div>
-</section>
-
-<!-- ===== PROMO BANNER ===== -->
-<section class="promo-banner section">
-  <div class="promo-inner">
-    <div class="promo-text">
-      <span class="promo-tag">پیشنهاد محدود</span>
-      <h2 class="promo-title">باشگاه VIP زیزی</h2>
-      <p class="promo-desc">عضو باشگاه مشتریان ما شوید و از تخفیف‌های انحصاری، ارسال رایگان دائمی و دسترسی زودتر به کالکشن‌های جدید بهره‌مند شوید.</p>
-      <a href="#" class="btn-gold-lg">عضویت رایگان</a>
-    </div>
-    <div class="promo-img-wrap">
-      <img src="../img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۴۵۳.jpg" alt="VIP">
-      <div class="promo-img-overlay"></div>
-      <div class="promo-stats">
-        <div class="promo-stat"><strong>+۵۰۰۰</strong><span>مشتری راضی</span></div>
-        <div class="promo-stat"><strong>۴.۹★</strong><span>امتیاز کاربران</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== TRUST LOGOS ===== -->
-<section class="brands-section section">
-  <div class="section-head">
-    <span class="section-tag">برندهای منتخب</span>
-  </div>
-  <div class="brands-strip">
-    <span class="brand-name" style="font-family:serif;font-style:italic">Armani</span>
-    <span class="brand-name">VERSACE</span>
-    <span class="brand-name" style="font-family:serif">Zara</span>
-    <span class="brand-name">HUGO BOSS</span>
-    <span class="brand-name" style="font-family:serif;font-style:italic">Gucci</span>
-    <span class="brand-name">VALENTINO</span>
-  </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-  <div class="footer-top">
-    <div class="footer-col brand-col">
-      <span class="logo-main footer-logo">ZIZI</span>
-      <span class="logo-sub footer-sub">CHARISMA</span>
-      <p class="footer-about">فروشگاه پوشاک لوکس با بیش از ۱۰ سال تجربه در ارائه بهترین برندهای روز دنیا به مشتریان ایرانی.</p>
-      <div class="social-links">
-        <a href="#" class="social-link" aria-label="اینستاگرام">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-        </a>
-        <a href="#" class="social-link" aria-label="تلگرام">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.283c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.938z"/></svg>
-        </a>
-        <a href="#" class="social-link" aria-label="واتساپ">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="footer-col">
-      <h4 class="footer-head">محصولات</h4>
-      <ul class="footer-links">
-        <li><a href="#">پوشاک زنانه</a></li>
-        <li><a href="#">پوشاک مردانه</a></li>
-        <li><a href="#">اکسسوری</a></li>
-        <li><a href="#">کالکشن ویژه</a></li>
-        <li><a href="#">حراجی</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4 class="footer-head">خدمات</h4>
-      <ul class="footer-links">
-        <li><a href="#">راهنمای خرید</a></li>
-        <li><a href="#">پیگیری سفارش</a></li>
-        <li><a href="#">شرایط بازگشت</a></li>
-        <li><a href="#">باشگاه مشتریان</a></li>
-        <li><a href="#">تماس با ما</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4 class="footer-head">خبرنامه</h4>
-      <p class="footer-nl-desc">از آخرین کالکشن‌ها و تخفیف‌ها باخبر شوید</p>
-      <div class="newsletter">
-        <input type="email" placeholder="ایمیل شما..." class="nl-input">
-        <button class="nl-btn">ثبت</button>
-      </div>
-      <div class="trust-badges">
-        <div class="trust-badge">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span>نماد اعتماد</span>
-        </div>
-        <div class="trust-badge">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-          <span>درگاه امن</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>© ۱۴۰۳ فروشگاه ZIZI — تمام حقوق محفوظ است</p>
-    <div class="footer-bottom-links">
-      <a href="#">حریم خصوصی</a>
-      <a href="#">شرایط استفاده</a>
-    </div>
-  </div>
-</footer>
-
-<!-- ===== FLOATING BUTTONS ===== -->
-<button class="fab fab-chat" id="fabChat" aria-label="چت با پشتیبانی">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-</button>
-<button class="fab fab-top" id="fabTop" aria-label="بازگشت به بالا">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
-</button>
-
-<!-- ===== CART DRAWER ===== -->
-<div class="drawer-overlay" id="drawerOverlay"></div>
-<aside class="cart-drawer" id="cartDrawer">
-  <div class="drawer-head">
-    <h3>سبد خرید</h3>
-    <button class="drawer-close" id="drawerClose">✕</button>
-  </div>
-  <div class="drawer-body">
-    <div class="cart-item">
-      <img src="../img/IMG_۲۰۲۴۰۲۲۸_۲۲۲۴۵۳.jpg" alt="">
-      <div class="cart-item-info">
-        <p class="cart-item-name">ست پیراهن و شلوار کلاسیک</p>
-        <p class="cart-item-price">۹,۳۸۰,۰۰۰ تومان</p>
-        <div class="qty-ctrl">
-          <button class="qty-btn">−</button>
-          <span class="qty-val">1</span>
-          <button class="qty-btn">+</button>
-        </div>
-      </div>
-      <button class="cart-item-remove">✕</button>
-    </div>
-  </div>
-  <div class="drawer-footer">
-    <div class="drawer-total">
-      <span>جمع کل:</span>
-      <strong>۹,۳۸۰,۰۰۰ تومان</strong>
-    </div>
-    <a href="#" class="btn-gold btn-full">ادامه خرید</a>
-  </div>
-</aside>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -30,26 +30,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 input, textarea { font-family: inherit; }
 
 /* ===== HEADER ===== */
-.c-header {
-  position: sticky; top: 0; z-index: 50;
-  background: var(--black);
-  padding: 0.9rem 1.5rem;
-  display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 1px solid rgba(201,168,76,0.18);
-}
-.c-back {
-  display: flex; align-items: center; gap: 0.4rem;
-  color: rgba(255,255,255,0.65);
-  font-size: 0.82rem;
-  transition: color 0.2s;
-}
-.c-back:hover { color: var(--gold); }
-.c-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem; font-weight: 900;
-  letter-spacing: 0.1em;
-  color: var(--gold);
-}
+
 
 /* ===== HERO ===== */
 .c-hero {

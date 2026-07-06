@@ -94,7 +94,7 @@
 
   // ---------- GATE LOGIC ----------
   // رمز ورود ثابت و از پیش تعیین‌شده — برای تغییرش همین مقدار را عوض کن
-  const ADMIN_PASSWORD = "Behrouzi1384";
+  const ADMIN_PASSWORD = "Didebaan@2026";
 
   const setupForm = document.getElementById("setupForm");
   const loginForm = document.getElementById("loginForm");
@@ -182,6 +182,51 @@
     document.getElementById("lastActivity").textContent = "۲۴ ساعت گذشته";
   }
 
+  function commentCardHTML(c){
+    return `
+      <div class="comment-row" data-idx="${c.idx}">
+        <div class="comment-top">
+          <div class="comment-who">
+            <div class="avatar">${initials(c.name)}</div>
+            <div>
+              <div class="comment-name">${escapeHtml(c.name)}</div>
+              <div class="comment-time">${timeAgo(c.createdAt)}${c.contact?' · '+escapeHtml(c.contact):''}</div>
+            </div>
+          </div>
+          <span class="status-badge ${c.approved?'status-approved':'status-pending'}">${c.approved?'تأییدشده':'در انتظار'}</span>
+        </div>
+        <div class="comment-text">${escapeHtml(c.text)}</div>
+        <div class="comment-actions">
+          ${!c.approved ? `<button class="act-btn approve" data-act="approve" data-idx="${c.idx}">تأیید</button>` : ""}
+          <button class="act-btn reject" data-act="delete" data-idx="${c.idx}">حذف</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function bindCommentActions(container){
+    container.querySelectorAll("[data-act]").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const idx = Number(btn.dataset.idx);
+        const act = btn.dataset.act;
+        btn.disabled = true;
+        btn.textContent = "...";
+        const fresh = await loadComments();
+        if(fresh === null){ alert("اتصال به سرور نظرات برقرار نشد. دوباره تلاش کن."); renderComments(); renderDashboard(); return; }
+        let updated = fresh;
+        if(act === "approve"){
+          updated = fresh.map(c => c.idx===idx ? {...c, approved:true} : c);
+        } else if(act === "delete"){
+          updated = fresh.filter(c => c.idx!==idx);
+        }
+        const ok = await saveComments(updated);
+        if(!ok) alert("ذخیره‌ی تغییرات با خطا مواجه شد. دوباره تلاش کن.");
+        renderComments();
+        renderDashboard();
+      });
+    });
+  }
+
   async function renderDashboard(){
     const comments = await loadComments();
     const stats = await loadStats();
@@ -207,21 +252,8 @@
     if(recent.length===0){
       box.innerHTML = '<div class="empty">هنوز نظری ثبت نشده است.</div>';
     } else {
-      box.innerHTML = recent.map(c => `
-        <div class="comment-row">
-          <div class="comment-top">
-            <div class="comment-who">
-              <div class="avatar">${initials(c.name)}</div>
-              <div>
-                <div class="comment-name">${escapeHtml(c.name)}</div>
-                <div class="comment-time">${timeAgo(c.createdAt)}${c.contact?' · '+escapeHtml(c.contact):''}</div>
-              </div>
-            </div>
-            <span class="status-badge ${c.approved?'status-approved':'status-pending'}">${c.approved?'تأییدشده':'در انتظار'}</span>
-          </div>
-          <div class="comment-text" style="padding-right:0;">${escapeHtml(c.text)}</div>
-        </div>
-      `).join("");
+      box.innerHTML = recent.map(commentCardHTML).join("");
+      bindCommentActions(box);
     }
   }
 
@@ -263,46 +295,8 @@
       box.innerHTML = '<div class="empty">نظری در این بخش وجود ندارد.</div>';
       return;
     }
-    box.innerHTML = list.map(c => `
-      <div class="comment-row" data-idx="${c.idx}">
-        <div class="comment-top">
-          <div class="comment-who">
-            <div class="avatar">${initials(c.name)}</div>
-            <div>
-              <div class="comment-name">${escapeHtml(c.name)}</div>
-              <div class="comment-time">${timeAgo(c.createdAt)}${c.contact?' · '+escapeHtml(c.contact):''}</div>
-            </div>
-          </div>
-          <span class="status-badge ${c.approved?'status-approved':'status-pending'}">${c.approved?'تأییدشده':'در انتظار'}</span>
-        </div>
-        <div class="comment-text">${escapeHtml(c.text)}</div>
-        <div class="comment-actions">
-          ${!c.approved ? `<button class="act-btn approve" data-act="approve" data-idx="${c.idx}">تأیید</button>` : ""}
-          <button class="act-btn reject" data-act="delete" data-idx="${c.idx}">حذف</button>
-        </div>
-      </div>
-    `).join("");
-
-    box.querySelectorAll("[data-act]").forEach(btn => {
-      btn.addEventListener("click", async () => {
-        const idx = Number(btn.dataset.idx);
-        const act = btn.dataset.act;
-        btn.disabled = true;
-        btn.textContent = "...";
-        const fresh = await loadComments();
-        if(fresh === null){ alert("اتصال به سرور نظرات برقرار نشد. دوباره تلاش کن."); renderComments(); return; }
-        let updated = fresh;
-        if(act === "approve"){
-          updated = fresh.map(c => c.idx===idx ? {...c, approved:true} : c);
-        } else if(act === "delete"){
-          updated = fresh.filter(c => c.idx!==idx);
-        }
-        const ok = await saveComments(updated);
-        if(!ok) alert("ذخیره‌ی تغییرات با خطا مواجه شد. دوباره تلاش کن.");
-        renderComments();
-        renderDashboard();
-      });
-    });
+    box.innerHTML = list.map(commentCardHTML).join("");
+    bindCommentActions(box);
   }
 
   // ---------- DEMO SUBMIT (می‌نویسد روی همان bin واقعی سایت) ----------
